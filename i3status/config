@@ -1,0 +1,57 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "memory"
+order += "tztime local"
+
+disk "/" {
+        format = "Disk free: %free"
+}
+
+wireless wlan0 {
+        format_up = "W: %essid"
+        format_down = ""
+}
+
+ethernet eth0 {
+        format_up = "E: Connected (%speed)"
+        format_down = ""
+}
+
+battery 0 {
+        format = "%status %consumption"
+        format_down = "No battery"
+        low_threshold = 10
+}
+
+cpu_temperature 0 {
+	format = "T: %degrees °C"
+	path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+cpu_usage {
+	format = "CPU%: %usage"
+	max_threshold = 80
+}
+
+memory {
+	format = "RAM: %used/%total"
+	threshold_degraded = "10%"
+	format_degraded = "MEMORY: %free"
+}
+
+tztime local {
+        format = "%A, %Y-%m-%d %H:%M"
+}
+
+
+
