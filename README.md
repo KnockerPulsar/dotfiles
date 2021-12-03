@@ -1,13 +1,20 @@
 # Linux Config
 My files for linux configuration.
 
+# How to use
+Create a symlink to the configuration folder or file you want to use.
+*Make sure the path to the file is absolute*
+For example `sudo ln -s /home/USER/Linux-Config/i3 .config/i3`
+
+For brightnessctl to work without root, you must be in the video group. You can add yourself to it by doing `sudo usermod -a -G video $USER` and rebooting.
+
 # Dependencies (assuming gnome is availabe)
 * i3
   * netspeed.sh
   * copyq
   * feh
   * amixer
-  * brightness
+  * brightnessctl
   * google-chrom
   * flameshot
 * i3status
