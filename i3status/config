@@ -26,12 +26,12 @@ disk "/" {
         format = "Disk free: %free"
 }
 
-wireless wlan0 {
+wireless _first_ {
         format_up = "W: %essid"
         format_down = ""
 }
 
-ethernet eth0 {
+ethernet _first_ {
         format_up = "E: Connected (%speed)"
         format_down = ""
 }
@@ -44,7 +44,7 @@ battery 0 {
 
 cpu_temperature 0 {
 	format = "T: %degrees °C"
-	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input"
+	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
 }
 
 cpu_usage {

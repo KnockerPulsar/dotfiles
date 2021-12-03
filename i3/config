@@ -26,12 +26,12 @@ font pango:monospace 10
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up j
-set $down k
-set $left l
-set $right semicolon
+set $left h
+set $down j
+set $up k
+set $right l
 set $mod Mod4
-set $wallpapers /mnt/AAE4829AE4826901/Backup/Wallpapers
+set $wallpapers ~/Pictures/Wallpapers
 
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -74,12 +74,6 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -94,13 +88,6 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Ctrl+m move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+Ctrl+a scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -168,21 +155,6 @@ bar {
 	status_command exec /home/tarek/.config/i3status/netspeed.sh
 }
 
-# Starting applications
-################################################################################
-# Setup language/layout switching between en and ar
-exec --no-startup-id setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle
-
-# Start copyq at startup
-exec --no-startup-id copyq
-
-# Start gnome daemon so gnome related things work properly
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-
-# Pick a random wallpaper from the wallpapers folder
-exec --no-startup-id feh --bg-scale --randomize $wallpapers/*.png $wallpapers/*.jpg $wallpapers/*.jpeg
-
-
 
 # Custom bindings
 ################################################################################
@@ -202,8 +174,17 @@ bindsym Print 			exec --no-startup-id flameshot gui
 # https://www.reddit.com/r/Fedora/comments/6dcc0o/fix_for_blank_gnome_control_center_settings_with/
 bindsym $mod+s exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
 
-# TODO: Tabbed and split layout toggles
+bindsym $mod+t layout toggle tabbed splitv splith
 
+# move the currently focused window to the scratchpad
+bindsym $mod+Ctrl+m move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+Ctrl+a scratchpad show
+
+# Change next split direction
+bindsym $mod+BackSpace split toggle
 
 # Colors
 ################################################################################
@@ -228,4 +209,21 @@ default_border pixel 1
 # Can't figure out how to test that. Need to somehow restart i3, then create a NEW floating window
 default_floating_border normal
 
+# Starting applications
+################################################################################
+# Setup language/layout switching between en and ar
+exec --no-startup-id setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle
 
+# Start copyq at startup
+exec --no-startup-id copyq
+
+# Start gnome daemon so gnome related things work properly
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+
+# Pick a random wallpaper from the wallpapers folder
+exec --no-startup-id exec feh --bg-scale --randomize $wallpapers/*.png $wallpapers/*.jpg
+
+# Had some issues with key-mapper, this seems to fix it 
+# Might require `sudo apt install policykit-1-gnome`
+# https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
