@@ -19,6 +19,8 @@ For brightnessctl to work without root, you can either:
   * brightnessctl
   * google-chrom
   * flameshot
+  * inputplug: (I use it to setup layout switching)
+  * playerctl: play and pause audio
 * i3status
 * neovim
 * polkit-gnome-authentication-agent-1 [becuase I had some issues with key-mapper launching](https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647)
@@ -33,7 +35,6 @@ You can go through each config and change out the dependencies for your own prog
      * Starts copyq 
      * Starts gnome daemon so that gnome things work properly
      * Starts feh to display a random wallpaper from a given folder 
-     * 
    * keybinds
      * Fn + Mute
      * Fn + Vol up/down
@@ -43,7 +44,8 @@ You can go through each config and change out the dependencies for your own prog
      * Super+s: launches gnome settings (pay attention to the flags)
      * Super+t: Toggles between tabbed, horizontal split, and vertical split window layout
      * Super+BackSpace: Toggles between splitting vertically and horizontally (for the next window)
-     * PrtScr: Launches flameshot (Screenshot utility)
+     * Super+backslash: Run `setup_keyboard_language.sh`
+     * PrtScr: Launches flameshot (Screenshot utility
    * i3 colors
      * focues, focused_inactive, unfocues colors
    * i3 flags 
@@ -52,21 +54,21 @@ You can go through each config and change out the dependencies for your own prog
      * default border: Set border style and thiccness
      * default floating border: same as above but for floating windows
 * i3status
- * Netspeed up and down (via netspeed.sh)
- * Free disk space (calculated from the root)
- * Battery status and power draw
- * CPU temperature
- * CPU usage
- * RAM usage & total
- * Date & time
+   * Netspeed up and down (via netspeed.sh)
+   * Free disk space (calculated from the root)
+   * Battery status and power draw
+   * CPU temperature
+   * CPU usage
+   * RAM usage & total
+   * Date & time
 * nvim
- * Built in syntax highlighting
- * no line wrapping
- * Relative + absolute line numbers
- * Auto indentation (Useful for python for example)
- * Incremental search
- * nohlsearch: Hightlight only during searching
+   * Built in syntax highlighting
+   * no line wrapping
+   * Relative + absolute line numbers
+   * Auto indentation (Useful for python for example)
+   * Incremental search
+   * nohlsearch: Hightlight only during searching
 * logind.conf
- * Sets up the power button and lid closing to suspend the OS.
+   * Sets up the power button and lid closing to suspend the OS.
 * .bashrc
   * PATH configuration and aliases

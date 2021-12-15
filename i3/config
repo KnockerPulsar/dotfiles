@@ -32,6 +32,8 @@ set $up k
 set $right l
 set $mod Mod4
 set $wallpapers ~/Pictures/Wallpapers
+set $config_repo /home/tarek/Linux-Config
+set $resize_val 1
 
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -42,13 +44,6 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+$left focus left
@@ -79,9 +74,6 @@ bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -128,16 +120,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width $resize_val px or $resize_val ppt
+        bindsym $down       resize grow height $resize_val px or $resize_val ppt
+        bindsym $up         resize shrink height $resize_val px or $resize_val ppt
+        bindsym $right      resize grow width $resize_val px or $resize_val ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width $resize_val px or $resize_val ppt
+        bindsym Down        resize grow height $resize_val px or $resize_val ppt
+        bindsym Up          resize shrink height $resize_val px or $resize_val ppt
+        bindsym Right       resize grow width $resize_val px or $resize_val ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -152,7 +144,7 @@ bar {
 	# `netspeed.sh` calls i3status internally 
         # status_command i3status
 	# https://archived.forum.manjaro.org/t/how-to-display-network-usage-up-down-in-i3-status/87272/4
-	status_command exec /home/tarek/.config/i3status/netspeed.sh
+	status_command $HOME/.config/i3status/netspeed.sh
 }
 
 
@@ -164,6 +156,7 @@ bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q  sset Master 5%-
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q  sset Master 5%+
 bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +5%
 bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q -n 6010 set 5%-
+bindsym XF86AudioPlay 		exec --no-startup-id playerctl play-pause
 
 # Launch chrome on super+shift+enter
 bindsym $mod+Shift+Return 	exec --no-startup-id google-chrome
@@ -186,6 +179,17 @@ bindsym $mod+Ctrl+a scratchpad show
 # Change next split direction
 bindsym $mod+BackSpace split toggle
 
+# Super + ctrl + space shows rofi
+bindsym $mod+Ctrl+space exec --no-startup-id rofi -show window -theme Paper-Dark.rasi
+
+# Super + space shows rofi run
+bindsym $mod+space exec --no-startup-id rofi -show run -theme Paper-Dark.rasi
+
+# Alt (Mod1) change focus between tiling / floating windows
+bindsym Mod1+Tab focus mode_toggle
+
+bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_language.sh
+
 # Colors
 ################################################################################
 # Focused window colors
@@ -197,7 +201,7 @@ client.unfocused	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#e3e3e3
 
 # i3 Flags
 ################################################################################
-focus_follows_mouse yes
+focus_follows_mouse no
 # If you go from ws 1 to ws 2 to do something, just do mod+2 to return to ws 1
 workspace_auto_back_and_forth yes
 
@@ -212,7 +216,7 @@ default_floating_border normal
 # Starting applications
 ################################################################################
 # Setup language/layout switching between en and ar
-exec --no-startup-id setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle
+exec --no-startup-id exec $HOME/.config/i3/setup_keyboard_language.sh
 
 # Start copyq at startup
 exec --no-startup-id copyq
@@ -227,3 +231,4 @@ exec --no-startup-id exec feh --bg-scale --randomize $wallpapers/*.png $wallpape
 # Might require `sudo apt install policykit-1-gnome`
 # https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
