@@ -116,20 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/mnt/AAE4829AE4826901/LinuxPrograms/Anaconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#    eval "$__conda_setup"
-# else
-#    if [ -f "/mnt/AAE4829AE4826901/LinuxPrograms/Anaconda/etc/profile.d/conda.sh" ]; then
-#        . "/mnt/AAE4829AE4826901/LinuxPrograms/Anaconda/etc/profile.d/conda.sh"
-#    else
-#        export PATH="/mnt/AAE4829AE4826901/LinuxPrograms/Anaconda/bin:$PATH"
-#    fi
-#fi
-#unset __conda_setup
-# <<< conda initialize <<<
 
 # Custom stuff starts here
 ################################################################################
@@ -137,3 +123,14 @@ alias ls=exa
 export SCRIPT_DIR=/usr/share/i3blocks
 export JAVA_HOME=/home/tarek/.jdks/corretto-16.0.2
 
+# Might be better to use absoulte paths?
+export PATH=$PATH:~/HDD.symlink/LinuxPrograms/flutter/bin
+export PATH=$PATH:~/HDD.symlink/LinuxPrograms/Android/sdk/cmdline-tools/latest/bin
+export PATH=$PATH:~/LinuxPrograms.symlink/modelsim_ase/bin
+export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/5.15.1/gcc_64/bin/
+export PATH=$PATH:/home/tarek/LinuxPrograms.symlink/Jetbrains/apps/IDEA-U/ch-0/213.6777.52/bin
+export PATH=$PATH:/home/tarek/LinuxPrograms.symlink/flutter/bin/cache/dart-sdk/bin
+export PATH=$PATH:$HOME/.pub-cache/bin
+export PATH=$PATH:/home/tarek/.jdks/corretto-16.0.2/bin
+
+. "$HOME/.cargo/env"

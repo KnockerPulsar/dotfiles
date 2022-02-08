@@ -154,8 +154,8 @@ bar {
 bindsym XF86AudioMute		exec --no-startup-id amixer -q -D pulse set Master toggle 
 bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q  sset Master 5%-
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q  sset Master 5%+
-bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +5%
-bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q -n 6010 set 5%-
+bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +2%
+bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q -n 6010 set 2%-
 bindsym XF86AudioPlay 		exec --no-startup-id playerctl play-pause
 
 # Launch chrome on super+shift+enter
@@ -188,22 +188,27 @@ bindsym $mod+space exec --no-startup-id rofi -show run -theme Paper-Dark.rasi
 # Alt (Mod1) change focus between tiling / floating windows
 bindsym Mod1+Tab focus mode_toggle
 
+# Setup language switching with left alt + left shift 
+# Start keymapper
 bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_language.sh
+
+# Disable capslock
+bindsym $mod+Escape exec --no-startup-id setxkbmap -option caps:none  
 
 # Colors
 ################################################################################
 # Focused window colors
 #	       		Tab border  	Tab bckg	Tab text	Child dir indicator	Window border
 client.focused		#1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
-client.focused_inactive	#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#e3e3e3
-client.unfocused	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#e3e3e3
+client.focused_inactive	#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#a3a3a3
+client.unfocused	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
 
 
 # i3 Flags
 ################################################################################
 focus_follows_mouse no
 # If you go from ws 1 to ws 2 to do something, just do mod+2 to return to ws 1
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # Sets windows border thiccness to 1 pixel
 # Removes titlebars

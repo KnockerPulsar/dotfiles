@@ -1,4 +1,5 @@
-# https://unix.stackexchange.com/questions/253489/how-to-set-the-keymap-for-keyboards-that-are-plugged-in-later
+# https://unix.stackexchange.com/questions/253489/how-to-set-the-keymap-for-keyboards-that-are-plugged-in-later 
+
 { echo "XIDeviceEnabled XISlaveKeyboard"; inputplug -d -c /bin/echo; } |
 while read event
 do
@@ -9,5 +10,4 @@ do
         esac
 done &
 
-key-mapper-control --command autoload --preset K606 && \
-setxkbmap -option caps:none # Disable capslock
+key-mapper-control --command autoload --preset K606 

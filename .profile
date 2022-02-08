@@ -27,10 +27,4 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/flutter/bin
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/Android/sdk/cmdline-tools/latest/bin
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/Jetbrains/apps/IDEA-U/ch-0/213.5744.223/bin/
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/Jetbrains/apps/AndroidStudio/ch-0/203.7784292/bin/
-export PATH=$PATH:~/.jdks/corretto-16.0.2/bin
-
-
+. "$HOME/.cargo/env"

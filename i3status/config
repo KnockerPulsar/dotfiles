@@ -44,7 +44,8 @@ battery 0 {
 
 cpu_temperature 0 {
 	format = "T: %degrees °C"
-	path = "/sys/class/thermal/thermal_zone9/temp"
+	# Quite inconsistent
+	path = /sys/class/thermal/thermal_zone7/temp
 }
 
 cpu_usage {
