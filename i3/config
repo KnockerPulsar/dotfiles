@@ -33,7 +33,9 @@ set $right l
 set $mod Mod4
 set $wallpapers ~/Pictures/Wallpapers
 set $config_repo /home/tarek/Linux-Config
+
 set $resize_val 1
+set $resize_val_fast 10
 
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -79,7 +81,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -112,14 +114,14 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+r mode "resize"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        # Pressing left/right will shrink/grow the window’s width.
+        # Pressing up/down will shrink/grow the window’s height.
         bindsym $left       resize shrink width $resize_val px or $resize_val ppt
         bindsym $down       resize grow height $resize_val px or $resize_val ppt
         bindsym $up         resize shrink height $resize_val px or $resize_val ppt
@@ -131,12 +133,22 @@ mode "resize" {
         bindsym Up          resize shrink height $resize_val px or $resize_val ppt
         bindsym Right       resize grow width $resize_val px or $resize_val ppt
 
+        # Faster versions of the above binds
+        bindsym Shift+$left       resize shrink width $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+$down       resize grow height $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+$up         resize shrink height $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+$right      resize grow width $resize_val_fast px or $resize_val_fast ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Shift+Left        resize shrink width $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+Down        resize grow height $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+Up          resize shrink height $resize_val_fast px or $resize_val_fast ppt
+        bindsym Shift+Right       resize grow width $resize_val_fast px or $resize_val_fast ppt
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -144,7 +156,24 @@ bar {
 	# `netspeed.sh` calls i3status internally 
         # status_command i3status
 	# https://archived.forum.manjaro.org/t/how-to-display-network-usage-up-down-in-i3-status/87272/4
-	status_command $HOME/.config/i3status/netspeed.sh
+	# status_command $HOME/.config/i3status/netspeed.sh
+	
+
+	status_command i3blocks
+	position bottom
+
+	colors {
+        separator #081419
+        background #111111
+
+        #                        #Border #Backg. #Text
+        focused_workspace        #fd06e3 #111111 #FFFFFF
+        inactive_workspace       #002b36 #586e75 #002b36
+        urgent_workspace         #d33682 #d33682 #fdf6e3
+
+        # Enable transparency for the separator? Not quite sure..
+        separator                $transparent
+  	}
 }
 
 
@@ -155,7 +184,7 @@ bindsym XF86AudioMute		exec --no-startup-id amixer -q -D pulse set Master toggle
 bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q  sset Master 5%-
 bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q  sset Master 5%+
 bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +2%
-bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q -n 6010 set 2%-
+bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q set 2%-
 bindsym XF86AudioPlay 		exec --no-startup-id playerctl play-pause
 
 # Launch chrome on super+shift+enter
@@ -212,7 +241,7 @@ workspace_auto_back_and_forth no
 
 # Sets windows border thiccness to 1 pixel
 # Removes titlebars
-default_border pixel 1
+default_border pixel 2
 
 # Leave floating windows alone?
 # Can't figure out how to test that. Need to somehow restart i3, then create a NEW floating window

@@ -10,57 +10,45 @@ For brightnessctl to work without root, you can either:
 1. Be in the video group. You can add yourself to it by doing `sudo usermod -a -G video $USER` and rebooting.
 2. Make it a SUID binary by doing `sudo chmod +s path/to/brightnessctl`
 
-# Dependencies (assuming gnome is availabe)
-* i3
-  * netspeed.sh
-  * copyq
-  * feh
-  * amixer
-  * brightnessctl
-  * google-chrom
-  * flameshot
-  * inputplug: (I use it to setup layout switching)
-  * playerctl: play and pause audio
-* i3status
+# Dependencies/Applications configured here (assuming gnome is availabe)
+* i3, and Applications used in the config file:
+  * copyq        : clipboard manager
+  * feh          : mainly for backgrounds
+  * amixer       : volume control 
+  * brightnessctl: brightness control
+  * flameshot    : screenshot utility
+  * playerctl    : play and pause audio
+  * google-chrome
+* i3blocks 
+  * Note that blocklets carry their own dependencies. All blocklets were obtained from [vivien/i3blocks-contrib](https://github.com/vivien/i3blocks-contrib). You can check there for each blocklet's dependencies.
 * neovim
 * polkit-gnome-authentication-agent-1 [becuase I had some issues with key-mapper launching](https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647)
+* rofi
 
-You can go through each config and change out the dependencies for your own programs or remove them altogether
+You can go through each config and change out the dependencies for your own programs or remove them altogether. Note that some paths are hardcoded so you will have to change them.
 
 # Included config files
  * i3
    * Default i3 config
-   * launching some applications,
-     * Calls setxkvmap to setup en/ar switching
-     * Starts copyq 
-     * Starts gnome daemon so that gnome things work properly
-     * Starts feh to display a random wallpaper from a given folder 
-   * keybinds
-     * Fn + Mute
-     * Fn + Vol up/down
-     * Fn + Brightness up/down
-     * Super+shift+enter: launches chrome
-     * Super+e: launches nautilus (file mananger)
-     * Super+s: launches gnome settings (pay attention to the flags)
-     * Super+t: Toggles between tabbed, horizontal split, and vertical split window layout
-     * Super+BackSpace: Toggles between splitting vertically and horizontally (for the next window)
-     * Super+backslash: Run `setup_keyboard_language.sh`
-     * PrtScr: Launches flameshot (Screenshot utility
+   * launching some applications on startup
+     * Calls [setup_keyboard_language.sh](i3/setup_keyboard_language.sh) to setup en/ar switching
+     * Starts `copyq` 
+     * Starts `gsd-xsettings` so that gnome things work properly
+     * Starts `feh` to display a random wallpaper from `/usr/share/backgrounds` folder 
    * i3 colors
-     * focues, focused_inactive, unfocues colors
+     * focued, focused_inactive, unfocues colors
    * i3 flags 
-     * focus follows mouse: self explanatory
-     * workspace auto back and forth: if you go to work space 2 (super+2), you can press the same buttons again to return to the source workspace
      * default border: Set border style and thiccness
      * default floating border: same as above but for floating windows
-* i3status
-   * Netspeed up and down (via netspeed.sh)
-   * Free disk space (calculated from the root)
-   * Battery status and power draw
-   * CPU temperature
-   * CPU usage
+* i3 blocks (left to right)
+   * Volume %
+   * Network SSID and netspeed up and down 
    * RAM usage & total
+   * CPU usage and temperature
+   * Battery percentage and status
    * Date & time
+   * Keyboard layout/language
+   * Free disk space (calculated from $HOME?)
 * nvim
    * Built in syntax highlighting
    * no line wrapping
@@ -71,4 +59,25 @@ You can go through each config and change out the dependencies for your own prog
 * logind.conf
    * Sets up the power button and lid closing to suspend the OS.
 * .bashrc
-  * PATH configuration and aliases
+  * PATH configuration, aliases, and environment variables.
+* .profile
+  * Other PATH path configurations (for rofi)
+  
+# i3 keybinds
+| Shortcut/Event                              | Action                                                                            |
+| ------------------------------------------- | --------------------------------------------------------------------------------- |
+| XF86AudioMute                               | Mute                                                                              |
+| XF86AudioLowerVolume / XF86AudioRaiseVolume | Vol up/down                                                                       |
+| XF86MonBrightnessUp / XF86MonBrightnessDown | Brightness up/down                                                                |
+| XF86AudioPlay                               | Play/pause                                                                        |
+| Super+shift+enter                           | launches chrome                                                                   |
+| Super+e                                     | launches nautilus (file mananger)                                                 |
+| Super+s                                     | launches gnome settings (pay attention to the flags)                              |
+| Super+t                                     | Toggles between tabbed, horizontal split, and vertical split window layout        |
+| Super+BackSpace                             | Toggles between splitting vertically and horizontally (for the next window)       |
+| Super+backslash                             | Run `setup_keyboard_language.sh` (for external keyboard use)                      |
+| Super+Escape                                | Run `setxkbmap -option caps:none` to disable capslock (for external keyboard use) |
+| PrtScr                                      | Launches flameshot (Screenshot utility)                                           |
+
+# Notes
+- I had some issues with GNOME themes not applying on Ubuntu 20.04. I was able to apply them using [LXAppearance](https://wiki.lxde.org/en/LXAppearance)

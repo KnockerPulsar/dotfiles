@@ -28,3 +28,9 @@ fi
 
 
 . "$HOME/.cargo/env"
+
+
+# Have to have these here instead of .bashrc since rofi seems to load PATH before .bashrc is read.
+export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/5.15.2/gcc_64/bin/
+export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/Tools/QtCreator/bin
+export PATH=$PATH:~/LinuxPrograms.symlink/Jetbrains/apps/IDEA-U/ch-0/213.6777.52/bin/

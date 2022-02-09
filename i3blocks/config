@@ -1,0 +1,120 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=$HOME/Linux-Config/i3blocks/i3blocklets/$BLOCK_NAME
+separator_block_width=15
+markup=pango
+
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+[volume]
+label=VOL 
+#label=♪
+instance=Master
+#instance=PCM
+interval=repeat
+signal=10
+color=#E0C097
+
+[essid]
+interval=1
+INTERFACE=wlp0s20f3
+color=#f5e351
+separator=false
+
+[bandwidth]
+#instance=eth0
+interval=1
+color=#f5e351
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory2]
+separator=true
+interval=persist
+color=#94DAFF
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage2]
+interval=1
+min_width=CPU: 100.00%
+interval=persist
+color=#FF7878
+separator=false
+
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+label=TEMP 
+interval=2
+SENSOR_CHIP="coretemp-isa-0000"
+color=#FF7878
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery]
+label=BAT 
+#label=⚡
+#instance=1
+interval=10
+separator=true
+interval=5
+color=#83e68b
+
+# Date Time
+#
+[time]
+command=date '+%a %d-%m-%Y %H:%M:%S'
+interval=5
+
+[xkb_layout]
+label=Layout 
+interval=persist
+
+# Seems to run the CPU a bit too hard?
+#[brightness]
+#interval=persist
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+[disk]
+label=Disk Free 
+#instance=/mnt/data
+interval=30
