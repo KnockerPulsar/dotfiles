@@ -50,7 +50,7 @@ separator=false
 
 [bandwidth]
 #instance=eth0
-interval=1
+interval=10
 color=#f5e351
 
 # Memory usage
@@ -79,7 +79,7 @@ separator=false
 # see the script for details.
 [temperature]
 label=TEMP 
-interval=2
+interval=10
 SENSOR_CHIP="coretemp-isa-0000"
 color=#FF7878
 
@@ -92,7 +92,7 @@ label=BAT
 #instance=1
 interval=10
 separator=true
-interval=5
+interval=10
 color=#83e68b
 
 # Date Time

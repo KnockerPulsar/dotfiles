@@ -10,4 +10,4 @@ do
         esac
 done &
 
-key-mapper-control --command autoload --preset K606 
+input-remapper-control --command autoload --preset K606 
