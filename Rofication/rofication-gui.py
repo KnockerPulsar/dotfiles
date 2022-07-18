@@ -43,8 +43,8 @@ def call_rofi(entries, additional_args=[]):
                              '-markup-rows',
                              '-sep', '\\0',
                              '-format', 'i',
-                             '-columns', '3',
-                             '-lines', '4',
+                             '-columns', '1',
+                             '-lines', '20',
                              '-eh', '2',
                              '-width', '-70' ])
     proc = subprocess.Popen(rofi_command+ additional_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
