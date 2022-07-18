@@ -12,12 +12,15 @@ For brightnessctl to work without root, you can either:
 
 # Dependencies/Applications configured here (assuming gnome is availabe)
 * i3, and Applications used in the config file:
-  * copyq        : clipboard manager
-  * feh          : mainly for backgrounds
-  * amixer       : volume control 
-  * brightnessctl: brightness control
-  * flameshot    : screenshot utility
-  * playerctl    : play and pause audio
+  * copyq             : clipboard manager
+  * feh               : mainly for backgrounds
+  * amixer            : volume control 
+  * brightnessctl     : brightness control
+  * flameshot         : screenshot utility
+  * playerctl         : play and pause audio
+  * rofication-daemon : notification daemon
+  * rofication-gui    : notification center
+  * rofication-i3statusblock (roficiation in the blocks folder): blocklet for notification count
   * google-chrome
 * i3blocks 
   * Note that blocklets carry their own dependencies. All blocklets were obtained from [vivien/i3blocks-contrib](https://github.com/vivien/i3blocks-contrib). You can check there for each blocklet's dependencies.
@@ -48,6 +51,7 @@ You can go through each config and change out the dependencies for your own prog
    * Battery percentage and status
    * Date & time
    * Keyboard layout/language
+   * Notification count
    * Free disk space (calculated from $HOME?)
 * nvim
    * Built in syntax highlighting
@@ -74,6 +78,7 @@ You can go through each config and change out the dependencies for your own prog
 | Super+e                                     | launches nautilus (file mananger)                                                 |
 | Super+s                                     | launches gnome settings (pay attention to the flags)                              |
 | Super+t                                     | Toggles between tabbed, horizontal split, and vertical split window layout        |
+| Super+n                                     | launches rofication-gui.py, a notification center                                 |
 | Super+BackSpace                             | Toggles between splitting vertically and horizontally (for the next window)       |
 | Super+backslash                             | Run `setup_keyboard_language.sh` (for external keyboard use)                      |
 | Super+Escape                                | Run `setxkbmap -option caps:none` to disable capslock (for external keyboard use) |

@@ -56,9 +56,9 @@ color=#f5e351
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
-[memory2]
+[memory]
 separator=true
-interval=persist
+interval=5
 color=#94DAFF
 
 # CPU usage
@@ -109,6 +109,10 @@ interval=persist
 #[brightness]
 #interval=persist
 
+[rofication]
+label=Notifications: 
+interval=persist
+
 # Disk usage
 #
 # The directory defaults to $HOME if the instance is not specified.
@@ -118,3 +122,4 @@ interval=persist
 label=Disk Free 
 #instance=/mnt/data
 interval=30
+

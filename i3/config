@@ -31,7 +31,7 @@ set $down j
 set $up k
 set $right l
 set $mod Mod4
-set $wallpapers ~/Pictures/Wallpapers
+set $wallpapers /usr/share/backgrounds
 set $config_repo /home/tarek/Linux-Config
 
 set $resize_val 1
@@ -43,6 +43,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+
+# Open roficiation gui
+bindsym $mod+n exec $config_repo/Rofication/rofication-gui.py
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -209,10 +212,10 @@ bindsym $mod+Ctrl+a scratchpad show
 bindsym $mod+BackSpace split toggle
 
 # Super + ctrl + space shows rofi
-bindsym $mod+Ctrl+space exec --no-startup-id rofi -show window -theme Paper-Dark.rasi
+bindsym $mod+Ctrl+space exec --no-startup-id rofi -show window
 
 # Super + space shows rofi run
-bindsym $mod+space exec --no-startup-id rofi -show run -theme Paper-Dark.rasi
+bindsym $mod+space exec --no-startup-id rofi -show drun 
 
 # Alt (Mod1) change focus between tiling / floating windows
 bindsym Mod1+Tab focus mode_toggle
@@ -266,3 +269,10 @@ exec --no-startup-id exec feh --bg-scale --randomize $wallpapers/*.png $wallpape
 # https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
+exec --no-startup-id compton
+
+# start rofication daemon
+exec --no-startup-id $config_repo/Rofication/rofication-daemon.py
+
+for_window [class="timetrap"] move scratchpad
+exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash"

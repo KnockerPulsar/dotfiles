@@ -122,16 +122,8 @@ fi
 alias ls=exa
 export SCRIPT_DIR=/usr/share/i3blocks
 export JAVA_HOME=/home/tarek/.jdks/corretto-16.0.2
-
-# Might be better to use absoulte paths?
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/flutter/bin
-export PATH=$PATH:~/HDD.symlink/LinuxPrograms/Android/sdk/cmdline-tools/latest/bin
-export PATH=$PATH:~/LinuxPrograms.symlink/modelsim_ase/bin
-export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/5.15.2/gcc_64/bin/
-export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/Tools/QtCreator/bin
-export PATH=$PATH:~/LinuxPrograms.symlink/Jetbrains/apps/IDEA-U/ch-0/213.6777.52/bin/
-export PATH=$PATH:/home/tarek/LinuxPrograms.symlink/flutter/bin/cache/dart-sdk/bin
-export PATH=$PATH:$HOME/.pub-cache/bin
-export PATH=$PATH:/home/tarek/.jdks/corretto-16.0.2/bin
+export ADT=/mnt/AAE4829AE4826901/MasterMicro/ADT-v2/ADT_v2
 
 . "$HOME/.cargo/env"
+
+
