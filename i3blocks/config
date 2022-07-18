@@ -111,7 +111,7 @@ interval=persist
 
 [rofication]
 label=Notifications: 
-interval=persist
+interval=5
 
 # Disk usage
 #
