@@ -21,6 +21,7 @@ For brightnessctl to work without root, you can either:
   * rofication-daemon : notification daemon
   * rofication-gui    : notification center
   * rofication-i3statusblock (roficiation in the blocks folder): blocklet for notification count
+  * timetrap          : CLI time tracking apps
   * google-chrome
 * i3blocks 
   * Note that blocklets carry their own dependencies. All blocklets were obtained from [vivien/i3blocks-contrib](https://github.com/vivien/i3blocks-contrib). You can check there for each blocklet's dependencies.

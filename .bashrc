@@ -122,8 +122,24 @@ fi
 alias ls=exa
 export SCRIPT_DIR=/usr/share/i3blocks
 export JAVA_HOME=/home/tarek/.jdks/corretto-16.0.2
-export ADT=/mnt/AAE4829AE4826901/MasterMicro/ADT-v2/ADT_v2
-
+export ADT="/mnt/AAE4829AE4826901/Master Micro/ADT-v2/ADT_v2"
+export PYTHONPATH=$PYTHONPATH:"/mnt/AAE4829AE4826901/Master Micro/ADT-v1/LUT/Core/ElectronicsCore/Amplifiers/amp_helpers"
 . "$HOME/.cargo/env"
 
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/tarek/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/tarek/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/tarek/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/tarek/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
