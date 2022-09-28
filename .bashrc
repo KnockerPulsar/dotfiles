@@ -121,7 +121,7 @@ fi
 ################################################################################
 alias ls=exa
 export SCRIPT_DIR=/usr/share/i3blocks
-export JAVA_HOME=/home/tarek/.jdks/corretto-16.0.2
+export JAVA_HOME=/home/tarek/.jdks/java-17-amazon-corretto
 export ADT="/mnt/AAE4829AE4826901/Master Micro/ADT-v2/ADT_v2"
 export PYTHONPATH=$PYTHONPATH:"/mnt/AAE4829AE4826901/Master Micro/ADT-v1/LUT/Core/ElectronicsCore/Amplifiers/amp_helpers"
 . "$HOME/.cargo/env"

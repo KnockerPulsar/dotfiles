@@ -3,12 +3,12 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 local key_mapper = function(mode, key, result)
-  vim.api.nvim_set_keymap(
-    mode,
-    key,
-    result,
-    {noremap = true, silent = true}
-  )
+	vim.api.nvim_set_keymap(
+		mode,
+		key,
+		result,
+		{noremap = true, silent = true}
+		)
 end
 
 
@@ -25,8 +25,8 @@ local packer = require'packer'
 local util = require'packer.util'
 
 packer.init({
-	package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
-})
+		package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
+	})
 
 local use = packer.use
 packer.reset()
@@ -36,9 +36,9 @@ packer.startup(function()
 	use 'nvim-treesitter/nvim-treesitter'
 
 	use {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 	}
 
 	use 'nvim-lua/completion-nvim'
@@ -85,6 +85,7 @@ local default_config = {
 -- setup language servers here
 lspconfig.tsserver.setup(default_config)
 lspconfig.clangd.setup(default_config)
+lspconfig.jdtls.setup(default_config)
 
 vim.g.mapleader = ' '
 
@@ -105,20 +106,23 @@ key_mapper('n', '<leader>fs', ':lua require"telescope.builtin".live_grep()<CR>')
 key_mapper('n', '<leader>fh', ':lua require"telescope.builtin".help_tags()<CR>')
 key_mapper('n', '<leader>fb', ':lua require"telescope.builtin".buffers()<CR>')
 
+key_mapper('', 'gh', "^")
+key_mapper('', 'gl', "$")
+
 require('mason').setup()
 require("mason-lspconfig").setup()
 
 require('snippy').setup({
-    mappings = {
-        is = {
-            ['<Tab>'] = 'expand_or_advance',
-            ['<S-Tab>'] = 'previous',
-        },
-        nx = {
-            ['<leader>x'] = 'cut_text',
-        },
-    },
-})
+		mappings = {
+			is = {
+				['<Tab>'] = 'expand_or_advance',
+				['<S-Tab>'] = 'previous',
+			},
+			nx = {
+				['<leader>x'] = 'cut_text',
+			},
+		},
+	})
 
 local cmp = require 'cmp'
 
@@ -129,11 +133,16 @@ cmp.setup({
 			end
 		}, 
 		mapping = cmp.mapping.preset.insert({
-				['<C-b>'] = cmp.mapping.scroll_docs(-4),
-				['<C-f>'] = cmp.mapping.scroll_docs(4),
-				['<C-Space>'] = cmp.mapping.complete(),
-				['<C-e>'] = cmp.mapping.abort(),
+				['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+				['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),['<C-e>'] = cmp.mapping.abort(),
 				['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+					else
+						fallback()
+					end
+				end)
 			}),
 
 		sources = cmp.config.sources({
@@ -144,8 +153,12 @@ cmp.setup({
 	})
 
 -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['clangd'].setup {
-    capabilities = capabilities
-  }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['clangd'].setup {
+	capabilities = capabilities
+}
+require('lspconfig')['jdtls'].setup {
+	capabilities = capabilities
+}
+
