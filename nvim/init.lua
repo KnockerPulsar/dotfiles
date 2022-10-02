@@ -6,6 +6,7 @@ vim.bo.autoindent = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
+vim.opt.timeoutlen = 500
 
 require('plugins')
 vim.cmd [[colorscheme moonfly]]
