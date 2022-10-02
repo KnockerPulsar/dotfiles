@@ -9,6 +9,7 @@ local key_mapper = function(mode, key, result)
 		)
 end
 
+
 vim.g.mapleader = ' '
 
 key_mapper('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
@@ -32,3 +33,4 @@ key_mapper('n', '<leader>gg', ':LazyGit<CR>')
 
 key_mapper('', 'gh', "^")
 key_mapper('', 'gl', "$")
+

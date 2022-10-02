@@ -8,5 +8,7 @@ vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.timeoutlen = 500
 
-require('plugins')
 vim.cmd [[colorscheme moonfly]]
+
+require('plugins')
+

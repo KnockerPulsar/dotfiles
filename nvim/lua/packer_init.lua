@@ -59,5 +59,25 @@ packer.startup(function()
 
 	use 'kdheepak/lazygit.nvim'
 
+	use {
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup {
+				layout = {
+					align = "center", -- align columns left, center or right
+				}
+			}
+		end
+	}
+
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
+
+
+	use "lukas-reineke/indent-blankline.nvim"
+	
+	use "terrortylor/nvim-comment"
 end
 )

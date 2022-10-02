@@ -1,12 +1,11 @@
 require('packer_init')
 
-local packer = require'packer'
-local use = packer.use
-
-
 require('lsp_init')
 
 require('telescope').setup {
+	defaults = {
+		path_display = { "smart" },
+	},
 	pickers = {
 		find_files = { hidden = true }
 	}
@@ -33,6 +32,7 @@ require('snippy').setup({
 
 require('cmp_init')
 
+
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
@@ -43,14 +43,14 @@ for lsp_name, _ in pairs(LspConfigs) do
 	}
 end
 
-use {
-	"folke/which-key.nvim",
-	config = function()
-		require("which-key").setup {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		}
-	end
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
 }
 
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript" },
+}
+
+require('nvim_comment').setup()
