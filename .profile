@@ -37,3 +37,4 @@ export PATH=$PATH:/opt/Jetbrains/apps/IDEA-U/ch-0/221.5921.22/bin
 export PATH=$PATH:~/eclipse-jdt/bin
 export PATH=$PATH:/home/tarek/.jdks/corretto-16.0.2/bin
 export PATH=$PATH:/home/tarek/flexlm_artwork_v11.17.2.linux64
+export PATH=$PATH:/home/tarek/college.symlink/CN/omnetpp-5.6.2/bin

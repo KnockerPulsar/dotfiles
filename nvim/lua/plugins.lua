@@ -18,23 +18,22 @@ require('custom_commands')
 require('mason').setup()
 require("mason-lspconfig").setup()
 
-require('snippy').setup({
-		mappings = {
-			is = {
-				['<Tab>'] = 'expand_or_advance',
-				['<S-Tab>'] = 'previous',
-			},
-			nx = {
-				['<leader>x'] = 'cut_text',
-			},
+require('snippy').setup {
+	mappings = {
+		is = {
+			['<Tab>'] = 'expand_or_advance',
 		},
-	})
+		nx = {
+			['<leader>x'] = 'cut_text',
+		},
+	},
+}
 
 require('cmp_init')
 
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
 for lsp_name, _ in pairs(LspConfigs) do
@@ -50,7 +49,14 @@ require("indent_blankline").setup {
 }
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript" },
+  ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript", "bash", "php" },
 }
 
 require('nvim_comment').setup()
+
+require('lualine').setup {
+	options = {
+		section_separators = { left = '', right = '' },
+		component_separators = { left = '|', right = '|' }
+	}
+}

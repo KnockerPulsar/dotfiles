@@ -28,6 +28,10 @@ command=$HOME/Linux-Config/i3blocks/i3blocklets/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+# i3 focused window split indicator
+[split-indicator]
+interval=1
+
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)

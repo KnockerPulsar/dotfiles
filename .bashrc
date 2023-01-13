@@ -124,22 +124,24 @@ export SCRIPT_DIR=/usr/share/i3blocks
 export JAVA_HOME=/home/tarek/.jdks/java-17-amazon-corretto
 export ADT="/mnt/AAE4829AE4826901/Master Micro/ADT-v2/ADT_v2"
 export PYTHONPATH=$PYTHONPATH:"/mnt/AAE4829AE4826901/Master Micro/ADT-v1/LUT/Core/ElectronicsCore/Amplifiers/amp_helpers"
-. "$HOME/.cargo/env"
+export PYTHONPATH=$PYTHONPATH:./devel/lib/python3/dist-packages/
+export PYTHONPATH=$PYTHONPATH:"/opt/ros/noetic/lib/python3/dist-packages/"
+export GCM_CREDENTIAL_STORE=plaintext
 
+. "$HOME/.cargo/env"
 
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tarek/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/tarek/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tarek/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/tarek/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
-

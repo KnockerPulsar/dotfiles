@@ -31,7 +31,6 @@ packer.startup(function()
 		"neovim/nvim-lspconfig",
 	}
 
-	use 'nvim-lua/completion-nvim'
 	use 'sheerun/vim-polyglot'
 
 	-- these are optional themes but I hear good things about gloombuddy ;)
@@ -59,16 +58,8 @@ packer.startup(function()
 
 	use 'kdheepak/lazygit.nvim'
 
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup {
-				layout = {
-					align = "center", -- align columns left, center or right
-				}
-			}
-		end
-	}
+	use "folke/which-key.nvim"
+	
 
 	use {
 		"windwp/nvim-autopairs",
@@ -77,7 +68,19 @@ packer.startup(function()
 
 
 	use "lukas-reineke/indent-blankline.nvim"
-	
 	use "terrortylor/nvim-comment"
+
+	use {"EdenEast/nightfox.nvim"}
+
+	use 'mfussenegger/nvim-dap'
+	use 'Shatur/neovim-ayu'
+	use 'navarasu/onedark.nvim'
+
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
 end
 )
+
+require("which-key").setup{}

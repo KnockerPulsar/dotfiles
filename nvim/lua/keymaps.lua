@@ -12,6 +12,8 @@ end
 
 vim.g.mapleader = ' '
 
+key_mapper('t', '<Esc>', '<C-\\><C-n>')
+
 key_mapper('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
 key_mapper('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>')
 key_mapper('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>')

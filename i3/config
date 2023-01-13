@@ -118,6 +118,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+r mode "resize"
+bindsym $mod+i bar mode toggle
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -156,27 +157,26 @@ mode "resize" {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	# `netspeed.sh` calls i3status internally 
+        # `netspeed.sh` calls i3status internally 
         # status_command i3status
-	# https://archived.forum.manjaro.org/t/how-to-display-network-usage-up-down-in-i3-status/87272/4
-	# status_command $HOME/.config/i3status/netspeed.sh
+        # https://archived.forum.manjaro.org/t/how-to-display-network-usage-up-down-in-i3-status/87272/4
+        # status_command $HOME/.config/i3status/netspeed.sh
 	
+        status_command i3blocks
+        position bottom
 
-	status_command i3blocks
-	position bottom
+        colors {
+                separator #081419
+                background #111111
 
-	colors {
-        separator #081419
-        background #111111
+                #                        #Border #Backg. #Text
+                focused_workspace        #fd06e3 #111111 #FFFFFF
+                inactive_workspace       #002b36 #586e75 #002b36
+                urgent_workspace         #d33682 #d33682 #fdf6e3
 
-        #                        #Border #Backg. #Text
-        focused_workspace        #fd06e3 #111111 #FFFFFF
-        inactive_workspace       #002b36 #586e75 #002b36
-        urgent_workspace         #d33682 #d33682 #fdf6e3
-
-        # Enable transparency for the separator? Not quite sure..
-        separator                $transparent
-  	}
+                # Enable transparency for the separator? Not quite sure..
+                separator                $transparent
+        }
 }
 
 
@@ -227,13 +227,16 @@ bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_lang
 # Disable capslock
 bindsym $mod+Escape exec --no-startup-id setxkbmap -option caps:none  
 
+# Cycle through wallpapers
+bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg
+
 # Colors
 ################################################################################
 # Focused window colors
-#	       		Tab border  	Tab bckg	Tab text	Child dir indicator	Window border
-client.focused		#1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
+#	       		            Tab border Tab bckg	Tab text	split indicator	Window border
+client.focused		      #1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
 client.focused_inactive	#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#a3a3a3
-client.unfocused	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
+client.unfocused	      #1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
 
 
 # i3 Flags
@@ -244,7 +247,7 @@ workspace_auto_back_and_forth no
 
 # Sets windows border thiccness to 1 pixel
 # Removes titlebars
-default_border pixel 2
+default_border pixel 0
 
 # Leave floating windows alone?
 # Can't figure out how to test that. Need to somehow restart i3, then create a NEW floating window
@@ -262,7 +265,7 @@ exec --no-startup-id copyq
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 
 # Pick a random wallpaper from the wallpapers folder
-exec --no-startup-id exec feh --bg-scale --randomize $wallpapers/*.png $wallpapers/*.jpg
+exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg
 
 # Had some issues with key-mapper, this seems to fix it 
 # Might require `sudo apt install policykit-1-gnome`
