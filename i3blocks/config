@@ -30,7 +30,7 @@ markup=pango
 
 # i3 focused window split indicator
 [split-indicator]
-interval=1
+interval=persist
 
 # Volume indicator
 #
@@ -39,9 +39,7 @@ interval=1
 # See the script for details.
 [volume]
 label=VOL 
-#label=♪
 instance=Master
-#instance=PCM
 interval=repeat
 signal=10
 color=#E0C097
@@ -53,7 +51,6 @@ color=#f5e351
 separator=false
 
 [bandwidth]
-#instance=eth0
 interval=10
 color=#f5e351
 
@@ -124,6 +121,5 @@ interval=5
 # (defaults to 10 for 10%).
 [disk]
 label=Disk Free 
-#instance=/mnt/data
 interval=30
 
