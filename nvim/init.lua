@@ -2,6 +2,7 @@
 vim.wo.rnu = true
 vim.wo.nu = true
 vim.bo.autoindent = true
+vim.o.undofile = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
@@ -16,14 +17,14 @@ vim.opt.cursorline = true
 vim.opt.mouse = ""
 
 
--- Seems like moonfly needs treesitter to run manually or something for the hightlighting
--- to work properly?
--- Setting the colorscheme to carbonfox does this.
--- vim.cmd [[colorscheme carbonfox]]
--- vim.cmd [[colorscheme moonfly]]
-vim.cmd [[colorscheme ayu]]
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
+vim.cmd [[autocmd! BufNewFile,BufRead *.cl set filetype=opencl ]]
 
+vim.cmd [[set termguicolors]]
+vim.cmd [[colorscheme ayu]]
+
+require('custom_commands')
+require('keymaps')
 require('plugins')
 
 -- local onedark = require('onedark')

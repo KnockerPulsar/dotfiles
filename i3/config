@@ -30,12 +30,15 @@ set $left h
 set $down j
 set $up k
 set $right l
+
 set $mod Mod4
+
 set $wallpapers /usr/share/backgrounds
 set $config_repo /home/tarek/Linux-Config
 
-set $resize_val 1
-set $resize_val_fast 10
+set $resize_val         10
+set $resize_val_fast    40
+set $move_val           20
 
 
 # use Mouse+$mod to drag floating windows to their wanted position
@@ -51,28 +54,28 @@ bindsym $mod+n exec $config_repo/Rofication/rofication-gui.py
 bindsym $mod+Shift+q kill
 
 # change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+bindsym $mod+$left      focus left 
+bindsym $mod+$down      focus down 
+bindsym $mod+$up        focus up   
+bindsym $mod+$right     focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left       focus left 
+bindsym $mod+Down       focus down 
+bindsym $mod+Up         focus up   
+bindsym $mod+Right      focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$left        move left     $move_val
+bindsym $mod+Shift+$down        move down     $move_val
+bindsym $mod+Shift+$up          move up       $move_val
+bindsym $mod+Shift+$right       move right    $move_val
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left         move left      $move_val
+bindsym $mod+Shift+Down         move down      $move_val
+bindsym $mod+Shift+Up           move up        $move_val
+bindsym $mod+Shift+Right        move right     $move_val
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -164,6 +167,7 @@ bar {
 	
         status_command i3blocks
         position bottom
+        mode hide
 
         colors {
                 separator #081419
@@ -183,15 +187,20 @@ bar {
 # Custom bindings
 ################################################################################
 # https://www.andreafortuna.org/2019/09/19/i3-window-manager-on-laptops-my-configuration/
-bindsym XF86AudioMute		exec --no-startup-id amixer -q -D pulse set Master toggle 
-bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q  sset Master 5%-
-bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q  sset Master 5%+
+bindsym XF86AudioMute		        exec --no-startup-id amixer -q -D pulse set Master toggle 
+bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q -D pulse set Master 5%-
+bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q -D pulse set Master 5%+
+
 bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +2%
-bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q set 2%-
-bindsym XF86AudioPlay 		exec --no-startup-id playerctl play-pause
+bindsym XF86MonBrightnessDown	  exec --no-startup-id brightnessctl -q set 2%-
+
+bindsym XF86AudioPlay 		      exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Launch chrome on super+shift+enter
 bindsym $mod+Shift+Return 	exec --no-startup-id google-chrome
+
 bindsym $mod+e 			exec --no-startup-id nautilus
 bindsym Print 			exec --no-startup-id flameshot gui
 
@@ -222,10 +231,7 @@ bindsym Mod1+Tab focus mode_toggle
 
 # Setup language switching with left alt + left shift 
 # Start keymapper
-bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_language.sh
-
-# Disable capslock
-bindsym $mod+Escape exec --no-startup-id setxkbmap -option caps:none  
+# bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_language.sh
 
 # Cycle through wallpapers
 bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg
@@ -253,6 +259,10 @@ default_border pixel 0
 # Can't figure out how to test that. Need to somehow restart i3, then create a NEW floating window
 default_floating_border normal
 
+# https://major.io/2019/02/08/automatic-floating-windows-in-i3/#:~:text=GNOME%20or%20KDE.-,Convert%20a%20window%20to%20floating%20temporarily,move%20it%20with%20your%20mouse.
+# https://www.reddit.com/r/i3wm/comments/3h94t9/how_to_find_a_name_of_a_program_to_use_for/
+for_window [class="ADT.py"] floating enable
+
 # Starting applications
 ################################################################################
 # Setup language/layout switching between en and ar
@@ -279,3 +289,8 @@ exec --no-startup-id $config_repo/Rofication/rofication-daemon.py
 
 for_window [class="timetrap"] move scratchpad
 exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash"
+
+
+# Disable capslock
+exec --no-startup-id setxkbmap -option caps:escape 
+
