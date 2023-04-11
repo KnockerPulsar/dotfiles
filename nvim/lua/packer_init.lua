@@ -49,13 +49,13 @@ local packer_stuff = {
 	'RRethy/nvim-base16',
 	'tjdevries/colorbuddy.nvim',
 	'bkegley/gloombuddy',
+	"blazkowolf/gruber-darker.nvim",
 
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	{ "bluz71/vim-moonfly-colors", as = "moonfly" },
 	{ "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
 	{ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } },
 	{ 'tanvirtin/vgit.nvim', requires = { 'nvim-lua/plenary.nvim' } },
-
 	'Vonr/align.nvim'
 }
 
@@ -67,6 +67,68 @@ return packer.startup(function()
 		use(thing)
 	end
 
+	use {
+		'rmagatti/auto-session',
+		config = function()
+			require("auto-session").setup {
+				log_level = "error",
+				auto_session_suppress_dirs = { "~/" },
+			}
+		end
+	}
+
+	use {
+		'LukasPietzschmann/telescope-tabs',
+		requires = { 'nvim-telescope/telescope.nvim' },
+		config = function()
+			require'telescope-tabs'.setup{}
+		end
+	}
+
+	use {
+		"akinsho/toggleterm.nvim",
+		tag = '*',
+		config = function()
+			require("toggleterm").setup()
+		end
+	}
+
+	use {
+		'crispgm/nvim-tabline',
+		config = function ()
+			require('tabline').setup({
+					show_index = true,        -- show tab index
+					show_modify = true,       -- show buffer modification indicator
+					show_icon = false,        -- show file extension icon
+					modify_indicator = '[+]', -- modify indicator
+					no_name = 'No name',      -- no name buffer name
+					brackets = { '[', ']' },  -- file name brackets surrounding
+				})
+		end
+	}
+
+	-- Lua
+	use {
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	}
+
+	use {
+		'rmagatti/goto-preview',
+		config = function()
+			require('goto-preview').setup {
+			lsp_configs = {}
+		}
+		end
+	}
+
+	use 'tpope/vim-fugitive'
 end
 )
 

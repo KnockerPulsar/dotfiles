@@ -6,7 +6,12 @@ require('nvim_comment').setup()
 require('mason').setup()
 require("mason-lspconfig").setup()
 require("which-key").setup()
-require('command-completion').setup()
+
+require('command-completion').setup{
+	use_matchfuzzy = false,
+	tab_completion = false
+}
+
 require('vgit').setup()
 
 local telescope_config = {
@@ -36,9 +41,11 @@ local snippy_config = {
 }
 
 local indent_blankline_config = {
-	space_char_blankline = " ",
+	char = "",
+	context_char = "│",
 	show_current_context = true,
 	show_current_context_start = true,
+	show_trailing_blankline_indent = false,
 }
 
 local nvim_treesitter_configs = {

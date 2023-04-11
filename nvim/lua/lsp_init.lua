@@ -14,7 +14,7 @@ local function dump(o)
 end
 
 local function custom_on_attach(client)
-	print('Attaching to ' .. client.name)
+	-- print('Attaching to ' .. client.name)
 
 	vim.api.nvim_create_autocmd("CursorHold", {
 			buffer = bufnr,

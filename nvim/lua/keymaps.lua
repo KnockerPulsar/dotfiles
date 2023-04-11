@@ -2,7 +2,8 @@ local vim = vim
 
 local NS = { noremap = true, silent = true }
 local NV = { 'n', 'v' }
-
+local NVI = { 'n', 'v', 'i' }
+local NVT = { 'n', 'v', 't' }
 AlignChar = function() require'align'.align_to_char(1, false) end
 AlignString = function() require'align'.align_to_string(false, false) end
 
@@ -100,8 +101,8 @@ local custom_keys = {
 		':lua require"telescope.builtin".buffers()<CR>'
 	},
 	{
-		'x',
-		'<leader>af',
+		NV,
+		',',
 		':lua vim.lsp.buf.code_action()<CR>'
 	},
 	{
@@ -114,16 +115,8 @@ local custom_keys = {
 		'<leader>rg',
 		':lua require"telescope.builtin".live_grep()<CR>'
 	},
-	{
-		'' ,
-		'gh',
-		"^"
-	},
-	{
-		'' ,
-		'gl',
-		"$"
-	},
+	{ '' , 'gh', "^" },
+	{ '' , 'gl', "$" },
 	{
 		'n',
 		'<leader>gw',
@@ -140,11 +133,60 @@ local custom_keys = {
 		'<leader>as',
 		AlignString,
 		NS
-	}
+	},
+	{ NV, '<C-u>', "<C-u>zz" },
+	{ NV, '<C-d>', "<C-d>zz" },
+	{
+		'n',
+		'<leader><tab>',
+		function ()
+			require('telescope-tabs').list_tabs()
+		end
+	},
+	{ NV, '<M-h>', '<C-w>h' },
+	{ NV, '<M-l>', '<C-w>l' },
+	{ NV, '<M-j>', '<C-w>j' },
+	{ NV, '<M-k>', '<C-w>k' },
+
+	{ NVT, '<C-h>', '5<C-w><' },
+	{ NVT, '<C-l>', '5<C-w>>' },
+	{ NVT, '<C-j>', '5<C-w>+' },
+	{ NVT, '<C-k>', '5<C-w>-' },
+
+	{ NV, '<C-n>', ':NextError<CR>' },
+	{ NV, '<C-p>', ':PrevError' },
+
+	{ 'n', '<M-1>', ':1tabnext<CR>'},
+	{ 'n', '<M-2>', ':2tabnext<CR>'},
+	{ 'n', '<M-3>', ':3tabnext<CR>'},
+	{ 'n', '<M-4>', ':4tabnext<CR>'},
+
+	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=vertical]] end }
 }
 
+if vim.g.neovide then
+	-- { NVT, '<C-h>', '5<C-w><' },
+	
+	table.insert(
+		custom_keys, { NVT, '<C-=>', function()
+				vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
+			end
+		}
+	)
+
+
+	table.insert(
+		custom_keys, { NVT, '<C-->',
+			function()
+				if vim.g.neovide_scale_factor > 0.5 then
+				vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
+				end
+			end
+		}
+	)
+end
+
 --{	 'n' , '<leader>fh', ':lua require"telescope.builtin".help_tags()<CR>' },
---
 for _, custom_bind in ipairs(custom_keys) do
 	-- NOTE: This might break if neovim updates its LuaJIT
 	local modes, desired_keys, result_keys, options = unpack(custom_bind)

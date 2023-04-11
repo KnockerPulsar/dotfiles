@@ -263,6 +263,9 @@ default_floating_border normal
 # https://www.reddit.com/r/i3wm/comments/3h94t9/how_to_find_a_name_of_a_program_to_use_for/
 for_window [class="ADT.py"] floating enable
 
+# https://thomasdegraaff.eu/notes/2022/05/06/i3-sticky-notes/
+for_window [class="xpad" instance="xpad"] floating enable
+
 # Starting applications
 ################################################################################
 # Setup language/layout switching between en and ar
@@ -289,7 +292,6 @@ exec --no-startup-id $config_repo/Rofication/rofication-daemon.py
 
 for_window [class="timetrap"] move scratchpad
 exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash"
-
 
 # Disable capslock
 exec --no-startup-id setxkbmap -option caps:escape 
