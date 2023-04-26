@@ -23,8 +23,13 @@ For brightnessctl to work without root, you can either:
   * rofication-i3statusblock (roficiation in the blocks folder): blocklet for notification count
   * timetrap          : CLI time tracking apps
   * google-chrome
+  * i3status
 * i3blocks 
   * Note that blocklets carry their own dependencies. All blocklets were obtained from [vivien/i3blocks-contrib](https://github.com/vivien/i3blocks-contrib). You can check there for each blocklet's dependencies.
+  * jq
+  * xkb-switch
+    * lib-xbkfile-dev
+    * libx11-dev
 * neovim
 * polkit-gnome-authentication-agent-1 [becuase I had some issues with key-mapper launching](https://github.com/NixOS/nixpkgs/issues/18012#issuecomment-606495647)
 * rofi

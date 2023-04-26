@@ -54,7 +54,7 @@ local packer_stuff = {
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	{ "bluz71/vim-moonfly-colors", as = "moonfly" },
 	{ "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
-	{ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } },
+	{ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } },
 	{ 'tanvirtin/vgit.nvim', requires = { 'nvim-lua/plenary.nvim' } },
 	'Vonr/align.nvim'
 }
@@ -129,6 +129,7 @@ return packer.startup(function()
 	}
 
 	use 'tpope/vim-fugitive'
+	use 'ggandor/leap.nvim'
 end
 )
 

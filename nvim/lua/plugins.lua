@@ -5,7 +5,11 @@ require('cmp_init')
 require('nvim_comment').setup()
 require('mason').setup()
 require("mason-lspconfig").setup()
-require("which-key").setup()
+require("which-key").setup({
+      window = { margin = { 1, 0, 0, 0.75 } },
+      layout = { height = { min = 4, max = 80 } },
+})
+require('leap').add_default_mappings()
 
 require('command-completion').setup{
 	use_matchfuzzy = false,

@@ -81,7 +81,8 @@ local lsp_configs = {
 	['html'] = cmp_config,
 	['intelephense'] = cmp_config,
 	['lemminx'] = cmp_config,
-	['pylsp'] = pylsp_config
+	['pylsp'] = pylsp_config,
+	-- ['opencl_ls'] = cmp_config
 }
 
 -- vim.lsp.set_log_level 'debug'

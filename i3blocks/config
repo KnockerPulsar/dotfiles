@@ -24,13 +24,13 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=$HOME/Linux-Config/i3blocks/i3blocklets/$BLOCK_NAME
+command=$HOME/dotfiles/i3blocks/i3blocklets/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
 # i3 focused window split indicator
 [split-indicator]
-interval=persist
+interval=1
 
 # Volume indicator
 #
@@ -46,7 +46,7 @@ color=#E0C097
 
 [essid]
 interval=1
-INTERFACE=wlp0s20f3
+# INTERFACE=wlp0s20f3
 color=#f5e351
 separator=false
 
@@ -67,7 +67,6 @@ color=#94DAFF
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage2]
-interval=1
 min_width=CPU: 100.00%
 interval=persist
 color=#FF7878
@@ -81,7 +80,7 @@ separator=false
 [temperature]
 label=TEMP 
 interval=10
-SENSOR_CHIP="coretemp-isa-0000"
+# SENSOR_CHIP="coretemp-isa-0000"
 color=#FF7878
 
 # Battery indicator
@@ -104,11 +103,11 @@ interval=5
 
 [xkb_layout]
 label=Layout 
-interval=persist
+interval=1
 
 # Seems to run the CPU a bit too hard?
-#[brightness]
-#interval=persist
+# [brightness]
+# interval=persist
 
 [rofication]
 label=Notifications: 

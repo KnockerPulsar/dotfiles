@@ -154,14 +154,14 @@ local custom_keys = {
 	{ NVT, '<C-k>', '5<C-w>-' },
 
 	{ NV, '<C-n>', ':NextError<CR>' },
-	{ NV, '<C-p>', ':PrevError' },
+	{ NV, '<C-p>', ':PrevError<CR>' },
 
 	{ 'n', '<M-1>', ':1tabnext<CR>'},
 	{ 'n', '<M-2>', ':2tabnext<CR>'},
 	{ 'n', '<M-3>', ':3tabnext<CR>'},
 	{ 'n', '<M-4>', ':4tabnext<CR>'},
 
-	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=vertical]] end }
+	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=vertical size=60]] end }
 }
 
 if vim.g.neovide then

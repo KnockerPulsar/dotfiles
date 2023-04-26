@@ -1,5 +1,1 @@
-configuration {
-	width: 10%;
-}
-
 @import "/home/tarek/.config/rofi/themes/Paper-Dark.rasi"

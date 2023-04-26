@@ -17,7 +17,7 @@
 
 #------------------------------------------------------------------------
 
-INTERFACE="${INTERFACE:-wlan0}"
+INTERFACE="${INTERFACE:-wlp2s0}"
 
 #------------------------------------------------------------------------
 
@@ -33,4 +33,4 @@ ESSID=$(/sbin/iwconfig $INTERFACE | perl -n -e'/ESSID:"(.*?)"/ && print $1')
 #------------------------------------------------------------------------
 
 echo $ESSID # full text
-echo $ESSID # short text
+# echo $ESSID # short text
