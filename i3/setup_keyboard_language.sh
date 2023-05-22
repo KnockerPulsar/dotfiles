@@ -5,7 +5,7 @@ while read event
 do
         case $event in
         XIDeviceEnabled*XISlaveKeyboard*)
-                setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle
+                setxkbmap -model pc104 -layout us,ara -option "lv3:ralt_alt,grp:alt_shift_toggle"
 		;;
         esac
 done &

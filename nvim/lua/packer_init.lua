@@ -2,13 +2,20 @@ local vim = vim
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
--- ensure that packer is installed
--- local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
--- if fn.empty(fn.glob(install_path)) > 0 then
--- 	execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
--- 	execute 'packadd packer.nvim'
--- end
---
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+
 local packer = require'packer'
 local util = require'packer.util'
 
@@ -130,6 +137,10 @@ return packer.startup(function()
 
 	use 'tpope/vim-fugitive'
 	use 'ggandor/leap.nvim'
+
+	if packer_bootstrap then
+		require('packer').sync()
+	end
 end
 )
 

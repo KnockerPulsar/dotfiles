@@ -80,7 +80,6 @@ separator=false
 [temperature]
 label=TEMP 
 interval=10
-# SENSOR_CHIP="coretemp-isa-0000"
 color=#FF7878
 
 # Battery indicator

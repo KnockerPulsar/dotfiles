@@ -120,26 +120,14 @@ fi
 # Custom stuff starts here
 ################################################################################
 alias ls=exa
+HDD=/media/tarek/Data
+
 export SCRIPT_DIR=/usr/share/i3blocks
-# export JAVA_HOME=/home/tarek/.jdks/java-17-amazon-corretto
-export ADT="/mnt/AAE4829AE4826901/Master Micro/ADT-v2/ADT_v2"
-export PYTHONPATH=$PYTHONPATH:"/mnt/AAE4829AE4826901/Master Micro/ADT-v1/LUT/Core/ElectronicsCore/Amplifiers/amp_helpers"
-export PYTHONPATH=$PYTHONPATH:./devel/lib/python3/dist-packages/
-export PYTHONPATH=$PYTHONPATH:"/opt/ros/noetic/lib/python3/dist-packages/"
 export GCM_CREDENTIAL_STORE=plaintext
 
 . "$HOME/.cargo/env"
 
-
 # Have to have these here instead of .bashrc since rofi seems to load PATH before .bashrc is read.
-export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/5.15.2/gcc_64/bin/
-export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/qt/Tools/QtCreator/bin
-export PATH=$PATH:/opt/Jetbrains/apps/IDEA-U/ch-0/221.5921.22/bin
-export PATH=$PATH:~/eclipse-jdt/bin
-export PATH=$PATH:/home/tarek/.jdks/corretto-16.0.2/bin
-export PATH=$PATH:/home/tarek/flexlm_artwork_v11.17.2.linux64
-export PATH=$PATH:/home/tarek/college.symlink/CN/omnetpp-5.6.2/bin
-export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/matlab_r2022b/bin 
 
 
 # >>> conda initialize >>>
@@ -157,16 +145,18 @@ export PATH=$PATH:/mnt/AAE4829AE4826901/LinuxPrograms/matlab_r2022b/bin
 # unset __conda_setup
 # <<< conda initialize <<<
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export HADOOP_HOME=/mnt/AAE4829AE4826901/LinuxPrograms/hadoop
-export PATH=$PATH:$HADOOP_HOME/bin
-export PATH=$PATH:$HADOOP_HOME/sbin
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
-export HADOOP_CLASSPATH="$(hadoop classpath)"
+# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+# export HADOOP_HOME=/mnt/AAE4829AE4826901/LinuxPrograms/hadoop
+# export PATH=$PATH:$HADOOP_HOME/bin
+# export PATH=$PATH:$HADOOP_HOME/sbin
+# export HADOOP_MAPRED_HOME=$HADOOP_HOME
+# export HADOOP_COMMON_HOME=$HADOOP_HOME
+# export HADOOP_HDFS_HOME=$HADOOP_HOME
+# export YARN_HOME=$HADOOP_HOME
+# export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+# export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+# export HADOOP_CLASSPATH="$(hadoop classpath)"
 
 export PDSH_RCMD_TYPE=ssh
+export PATH=$PATH:/home/tarek/.local/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/tarek/matlab_r2023a/bin/glnxa64/

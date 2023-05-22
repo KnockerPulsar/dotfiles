@@ -1,4 +1,3 @@
-amixer
 brightnessctl 
 build-essential git
 clinfo
@@ -9,13 +8,11 @@ feh
 flameshot
 gnome-tweaks
 gnome-tweaks
-google-chrome
 i3blocks
 i3status
 i3-wm i3status
 inxi
 jq
-libx11-de
 libx11-dev
 libxkbfile-dev
 lightdm
@@ -24,23 +21,28 @@ lightdm-gtk-greeter-settings
 linux-generic
 mesa-utils
 neovim
-nvme
 nvme-cli
-nvme-smart 
 opencl-headers
 playerctl
 python3-pip
-rocm-opencl-runtime
-rocm-opencl-runtime
-rocm-opencl-runtime
-rocm-smi
-rocm-smi
-rocm-smi-lib
-roc-smi
 rofi
-wattman
-wattman-gtk
-xkb-switch
-xkb_switch
 input-remapper
 inputplug
+
+git
+curl
+libfuse2
+
+# AMD stuff
+# rocm-opencl-runtime
+# rocm-opencl-runtime
+# rocm-opencl-runtime
+# rocm-smi
+# rocm-smi
+# rocm-smi-lib
+# roc-smi
+
+# Not apt stuff.
+# amixer
+# google-chrome
+# xkb-switch

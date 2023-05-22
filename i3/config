@@ -235,7 +235,7 @@ bindsym Mod1+Tab focus mode_toggle
 
 # Setup language switching with left alt + left shift 
 # Start keymapper
-bindsym $mod+backslash exec --no-startup-id $HOME/.config/i3/setup_keyboard_language.sh
+bindsym $mod+backslash exec --no-startup-id $config_repo/i3/setup_keyboard_language.sh
 
 # Cycle through wallpapers
 bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg

@@ -115,8 +115,6 @@ local custom_keys = {
 		'<leader>rg',
 		':lua require"telescope.builtin".live_grep()<CR>'
 	},
-	{ '' , 'gh', "^" },
-	{ '' , 'gl', "$" },
 	{
 		'n',
 		'<leader>gw',
