@@ -30,13 +30,10 @@ local packer_stuff = {
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
-	'sheerun/vim-polyglot',
 
-	'prettier/vim-prettier',
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 	'nvim-lua/telescope.nvim',
-	'jremmen/vim-ripgrep',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
@@ -59,21 +56,27 @@ local packer_stuff = {
 	"blazkowolf/gruber-darker.nvim",
 
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+	-- { 'nvim-treesitter/nvim-treesitter-context' },
 	{ "bluz71/vim-moonfly-colors", as = "moonfly" },
-	{ "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end },
 	{ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } },
 	{ 'tanvirtin/vgit.nvim', requires = { 'nvim-lua/plenary.nvim' } },
-	'Vonr/align.nvim'
+
+	'Vonr/align.nvim',
+	'tpope/vim-fugitive',
+	'ggandor/leap.nvim',
+	'sbdchd/neoformat',
 }
 
---- startup and add configure plugins
+-- startup and add configure plugins
 return packer.startup(function()
 	use	'wbthomason/packer.nvim'
 
+	-- Use plugins (for plugins that are unlikely to change, their configs can be found in `plugins.lua` )
 	for _, thing in ipairs(packer_stuff) do
 		use(thing)
 	end
 
+	-- Plugins under testing, once I think they're good for daily use, will be split to a declaration above and a more (or less) detailed config.
 	use {
 		'rmagatti/auto-session',
 		config = function()
@@ -130,13 +133,15 @@ return packer.startup(function()
 		'rmagatti/goto-preview',
 		config = function()
 			require('goto-preview').setup {
-			lsp_configs = {}
-		}
+				default_mappings = true;
+			}
 		end
 	}
 
-	use 'tpope/vim-fugitive'
-	use 'ggandor/leap.nvim'
+	use { 
+	    "windwp/nvim-autopairs", 
+	    config = function() require("nvim-autopairs").setup {} end 
+	}
 
 	if packer_bootstrap then
 		require('packer').sync()

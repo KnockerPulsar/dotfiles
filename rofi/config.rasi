@@ -1,1 +1,5 @@
+configuration {
+    window-format: "{w}\t{c}\t{t}\t{c}"; /* Show only the workspace and program title*/
+}
+
 @import "/home/tarek/.config/rofi/themes/Paper-Dark.rasi"

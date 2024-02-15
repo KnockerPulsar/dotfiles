@@ -1,0 +1,1 @@
+tlp-stat -s | awk -F '= ' '/^Mode/ {print $2}' | awk '{print $1}'

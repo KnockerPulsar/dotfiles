@@ -101,16 +101,6 @@ local custom_keys = {
 		':lua require"telescope.builtin".buffers()<CR>'
 	},
 	{
-		NV,
-		',',
-		':lua vim.lsp.buf.code_action()<CR>'
-	},
-	{
-		'n',
-		'<leader>rn',
-		':lua vim.lsp.buf.rename()<CR>'
-	},
-	{
 		'n',
 		'<leader>rg',
 		':lua require"telescope.builtin".live_grep()<CR>'
@@ -119,6 +109,21 @@ local custom_keys = {
 		'n',
 		'<leader>gw',
 		':lua require"telescope.builtin".grep_string()<CR>'
+	},
+	{
+		'n',
+		'<leader><tab>',
+		':lua require"telescope-tabs".list_tabs()<CR>'
+	},
+	{
+		NV,
+		',',
+		':lua vim.lsp.buf.code_action()<CR>'
+	},
+	{
+		'n',
+		'<leader>rn',
+		':lua vim.lsp.buf.rename()<CR>'
 	},
 	{
 		'x',
@@ -134,13 +139,7 @@ local custom_keys = {
 	},
 	{ NV, '<C-u>', "<C-u>zz" },
 	{ NV, '<C-d>', "<C-d>zz" },
-	{
-		'n',
-		'<leader><tab>',
-		function ()
-			require('telescope-tabs').list_tabs()
-		end
-	},
+
 	{ NV, '<M-h>', '<C-w>h' },
 	{ NV, '<M-l>', '<C-w>l' },
 	{ NV, '<M-j>', '<C-w>j' },
@@ -159,7 +158,7 @@ local custom_keys = {
 	{ 'n', '<M-3>', ':3tabnext<CR>'},
 	{ 'n', '<M-4>', ':4tabnext<CR>'},
 
-	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=vertical size=60]] end }
+	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=horizontal size=15]] end }
 }
 
 if vim.g.neovide then

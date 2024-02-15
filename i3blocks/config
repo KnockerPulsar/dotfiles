@@ -40,7 +40,7 @@ interval=1
 [volume]
 label=VOL 
 instance=Master
-interval=repeat
+interval=1
 signal=10
 color=#E0C097
 
@@ -62,6 +62,9 @@ separator=true
 interval=5
 color=#94DAFF
 
+[tlp-profile]
+interval=5
+
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
@@ -81,6 +84,7 @@ separator=false
 label=TEMP 
 interval=10
 color=#FF7878
+SENSOR_CHIP="coretemp-isa-0000"
 
 # Battery indicator
 #
@@ -102,7 +106,7 @@ interval=5
 
 [xkb_layout]
 label=Layout 
-interval=1
+interval=persistent
 
 # Seems to run the CPU a bit too hard?
 # [brightness]

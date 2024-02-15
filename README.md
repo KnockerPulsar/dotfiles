@@ -50,6 +50,7 @@ You can go through each config and change out the dependencies for your own prog
      * default border: Set border style and thiccness
      * default floating border: same as above but for floating windows
 * i3 blocks (left to right)
+   * Split indicator for the currently focused i3 window.
    * Volume %
    * Network SSID and netspeed up and down 
    * RAM usage & total
@@ -59,19 +60,22 @@ You can go through each config and change out the dependencies for your own prog
    * Keyboard layout/language
    * Notification count
    * Free disk space (calculated from $HOME?)
-* nvim
+* nvim (might be out of date, check the config)
    * Built in syntax highlighting
    * no line wrapping
    * Relative + absolute line numbers
    * Auto indentation (Useful for python for example)
    * Incremental search
    * nohlsearch: Hightlight only during searching
+   * A bunch of plugins
 * logind.conf
    * Sets up the power button and lid closing to suspend the OS.
 * .bashrc
   * PATH configuration, aliases, and environment variables.
 * .profile
   * Other PATH path configurations (for rofi)
+* tlp.conf
+    * Defines CPU parameters for battery and AC profiles.
   
 # i3 keybinds
 | Shortcut/Event                              | Action                                                                            |
@@ -92,3 +96,4 @@ You can go through each config and change out the dependencies for your own prog
 
 # Notes
 - I had some issues with GNOME themes not applying on Ubuntu 20.04. I was able to apply them using [LXAppearance](https://wiki.lxde.org/en/LXAppearance)
+- You must have i3blocks 1.5 or newer for the temperature block to show the correct temperature. Make sure the `SENSOR_CHIP` parameter in i3block's config matches your CPU.

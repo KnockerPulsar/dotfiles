@@ -120,43 +120,47 @@ fi
 # Custom stuff starts here
 ################################################################################
 alias ls=exa
-HDD=/media/tarek/Data
 
 export SCRIPT_DIR=/usr/share/i3blocks
 export GCM_CREDENTIAL_STORE=plaintext
 
 . "$HOME/.cargo/env"
 
-# Have to have these here instead of .bashrc since rofi seems to load PATH before .bashrc is read.
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/mnt/AAE4829AE4826901/LinuxPrograms/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
-# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-# export HADOOP_HOME=/mnt/AAE4829AE4826901/LinuxPrograms/hadoop
-# export PATH=$PATH:$HADOOP_HOME/bin
-# export PATH=$PATH:$HADOOP_HOME/sbin
-# export HADOOP_MAPRED_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_HOME=$HADOOP_HOME
-# export HADOOP_HDFS_HOME=$HADOOP_HOME
-# export YARN_HOME=$HADOOP_HOME
-# export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-# export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
-# export HADOOP_CLASSPATH="$(hadoop classpath)"
-
+export JAVA_HOME=$HOME/software/jdk-17.0.10
 export PDSH_RCMD_TYPE=ssh
 export PATH=$PATH:/home/tarek/.local/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/tarek/matlab_r2023a/bin/glnxa64/
+export PATH=$PATH:/home/tarek/Downloads/renderdoc_1.27/bin/
+export PATH=$PATH:$JAVA_HOME/bin
+
+alias git-conflicts="git diff --name-only --diff-filter=U --relative"
+alias rm="trash-put"
+
+# https://faq.i3wm.org/question/2481/how-to-show-cli-application-name-in-window-title.1.html
+case "$TERM" in
+xterm*|rxvt*|screen*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+
+    # Show the currently running command in the terminal title:
+    # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+    show_command_in_title_bar()
+    {
+        case "$BASH_COMMAND" in
+            *\033]0*)
+                # The command is trying to set the title bar as well;
+                # this is most likely the execution of $PROMPT_COMMAND.
+                # In any case nested escapes confuse the terminal, so don't
+                # output them.
+                ;;
+            *)
+                echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} \$ ${BASH_COMMAND}\007"
+                ;;
+        esac
+    }
+    trap show_command_in_title_bar DEBUG
+    ;;
+*)
+    ;;
+esac
+
+# Interferes with splash's libportaudio!
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/tarek/matlab_r2023a/bin/glnxa64/

@@ -5,22 +5,23 @@ require('cmp_init')
 require('nvim_comment').setup()
 require('mason').setup()
 require("mason-lspconfig").setup()
+require('vgit').setup()
+
+require('leap').add_default_mappings()
+
 require("which-key").setup({
       window = { margin = { 1, 0, 0, 0.75 } },
       layout = { height = { min = 4, max = 80 } },
 })
-require('leap').add_default_mappings()
 
 require('command-completion').setup{
 	use_matchfuzzy = false,
 	tab_completion = false
 }
 
-require('vgit').setup()
-
-local telescope_config = {
+require('telescope').setup{
 	defaults = {
-		path_display = { "truncate" },
+		-- path_display = { "truncate" },
 		layout_config = {
 			width = 0.9,
 			height = 0.9
@@ -28,12 +29,15 @@ local telescope_config = {
 		file_ignore_patterns = { '.git' }
 	},
 	pickers = {
-		find_files  = { hidden = true },
+		find_files  = { hidden = true, theme = 'ivy' },
+		buffers = { theme = 'ivy' },
+		live_grep = { theme = 'ivy' },
+		grep_string = { theme = 'ivy' },
 		colorscheme = { enable_preview = true }
 	}
 }
 
-local snippy_config = {
+require('snippy').setup{
 	mappings = {
 		is = {
 			['<Tab>'] = 'expand_or_advance',
@@ -44,49 +48,32 @@ local snippy_config = {
 	},
 }
 
-local indent_blankline_config = {
-	char = "",
-	context_char = "│",
-	show_current_context = true,
-	show_current_context_start = true,
-	show_trailing_blankline_indent = false,
+require('nvim-treesitter.configs').setup{
+    ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript", "bash", "php", "typescript" },
+    highlight = { enabled = true },
+    indent = { enabled = true },
 }
 
-local nvim_treesitter_configs = {
-	ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript", "bash", "php" },
+require('ibl').setup {
+    indent = {
+	smart_indent_cap = true
+    },
+    scope = { enabled = true, show_start = true }
 }
 
-local lualine_config = {
+require('lualine').setup {
 	options = {
 		section_separators = { left = '', right = '' },
 		component_separators = { left = '|', right = '|' }
 	}
 }
 
-local configs = {
-	['telescope'] = telescope_config,
-	['snippy'] = snippy_config,
-	['indent_blankline'] = indent_blankline_config,
-	['nvim-treesitter.configs'] = nvim_treesitter_configs,
-	['lualine'] = lualine_config
-}
-
-for pkg, config in pairs(configs) do
-	require(pkg).setup(config)
-end
-
-local wk = require('which-key')
-
--- Maps 
--- <leader> a => "Align"
--- <leader> a c => "To character"
--- <leader> a s => "To string"
-wk.register({
+require('which-key').register({
 		a = {
 			name = "Align",
 			c = "To character",
 			s = "To string"
 		}
 	},
-	{prefix = vim.g.mapleader}
-	)
+	{ prefix = vim.g.mapleader }
+)

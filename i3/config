@@ -164,11 +164,6 @@ mode "resize" {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        # `netspeed.sh` calls i3status internally 
-        # status_command i3status
-        # https://archived.forum.manjaro.org/t/how-to-display-network-usage-up-down-in-i3-status/87272/4
-        # status_command $HOME/.config/i3status/netspeed.sh
-	
         status_command i3blocks
         position bottom
         mode hide
@@ -191,14 +186,14 @@ bar {
 # Custom bindings
 ################################################################################
 # https://www.andreafortuna.org/2019/09/19/i3-window-manager-on-laptops-my-configuration/
-bindsym XF86AudioMute		        exec --no-startup-id amixer -q -D pulse set Master toggle 
-bindsym XF86AudioLowerVolume    exec --no-startup-id amixer -q -D pulse set Master 5%-
-bindsym XF86AudioRaiseVolume    exec --no-startup-id amixer -q -D pulse set Master 5%+
+bindsym XF86AudioMute		exec --no-startup-id pactl set-sink-mute 0 toggle && pactl set-sink-mute 1 toggle 
+bindsym XF86AudioLowerVolume    exec --no-startup-id pactl set-sink-volume 0 -5% && pactl set-sink-volume 1 -5%
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pactl set-sink-volume 0 +5% && pactl set-sink-volume 1 +5%
 
 bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +2%
-bindsym XF86MonBrightnessDown	  exec --no-startup-id brightnessctl -q set 2%-
+bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q set 2%-
 
-bindsym XF86AudioPlay 		      exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
@@ -243,31 +238,24 @@ bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.
 # Colors
 ################################################################################
 # Focused window colors
-#	       		            Tab border Tab bckg	Tab text	split indicator	Window border
-client.focused		      #1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
-client.focused_inactive	#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#a3a3a3
-client.unfocused	      #1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
+#	       		        Tab border 	Tab bckg	Tab text	split indicator		Window border
+client.focused		      	#1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
+client.focused_inactive		#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#a3a3a3
+client.unfocused	      	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
 
 
 # i3 Flags
 ################################################################################
 focus_follows_mouse no
+
 # If you go from ws 1 to ws 2 to do something, just do mod+2 to return to ws 1
 workspace_auto_back_and_forth no
 
-# Sets windows border thiccness to 1 pixel
-# Removes titlebars
-default_border none
+# Removes titlebars, as well as window borders
+default_border pixel 1
 
 # Leave floating windows alone?
 default_floating_border none
-
-# https://major.io/2019/02/08/automatic-floating-windows-in-i3/#:~:text=GNOME%20or%20KDE.-,Convert%20a%20window%20to%20floating%20temporarily,move%20it%20with%20your%20mouse.
-# https://www.reddit.com/r/i3wm/comments/3h94t9/how_to_find_a_name_of_a_program_to_use_for/
-for_window [class="ADT.py"] floating enable
-
-# https://thomasdegraaff.eu/notes/2022/05/06/i3-sticky-notes/
-for_window [class="xpad" instance="xpad"] floating enable
 
 # Starting applications
 ################################################################################
@@ -298,4 +286,3 @@ exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash
 
 # Disable capslock
 exec --no-startup-id setxkbmap -option caps:escape 
-
