@@ -71,12 +71,12 @@ end
 function Set_minimal_ui(minimal)
 	if minimal then
 		vim.opt.laststatus = 1
-		vim.opt.cmdheight = 1
+		vim.opt.cmdheight = 0
 
 		vim.cmd('windo set nornu nonu signcolumn=no')
 	else
-		vim.opt.laststatus = 0
-		vim.opt.cmdheight = 0
+		vim.opt.laststatus = 2
+		vim.opt.cmdheight = 1
 
 		vim.cmd('windo set rnu nu signcolumn=auto')
 	end

@@ -235,13 +235,17 @@ bindsym $mod+backslash exec --no-startup-id $config_repo/i3/setup_keyboard_langu
 # Cycle through wallpapers
 bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg
 
+bindsym $mod+shift+semicolon exec --no-startup-id $config_repo/myrmidon/myrmidon.sh
+
 # Colors
 ################################################################################
+
 # Focused window colors
+# Tab stuff doesn't really matter right now since window titles are disabled
 #	       		        Tab border 	Tab bckg	Tab text	split indicator		Window border
 client.focused		      	#1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
-client.focused_inactive		#1c1c1c		#4c4c4c		#ffffff		#2e9ef4			#a3a3a3
-client.unfocused	      	#1c1c1c		#1c1c1c		#6c6cic		#2e9ef4			#636363
+client.focused_inactive		#1c1c1c		#4c4c4c		#ffffff		#222244			#222222
+client.unfocused	      	#1c1c1c		#1c1c1c		#6c6cic		#222244			#222222
 
 
 # i3 Flags

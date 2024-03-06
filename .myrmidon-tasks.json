@@ -1,0 +1,7 @@
+[
+	{
+		"name": "Swap monitor workspaces",
+		"command": "$DOTFILES/swap_workspaces.sh"
+
+	}
+]
