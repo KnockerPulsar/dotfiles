@@ -1,7 +1,5 @@
 local vim = vim
 
-Minimal = false
-
 -- Opens the header file on the left and the cpp file on the right.
 -- Can only be called from a .h/.hpp and .c/.cpp files
 function Open_corresponding_file()
@@ -68,43 +66,60 @@ function Open_corresponding_header_file()
 	vim.cmd('edit ' .. header)
 end
 
-function Set_minimal_ui(minimal)
-	if minimal then
-		vim.opt.laststatus = 1
-		vim.opt.cmdheight = 0
+function Filter_symbols(_args)
+	local args = _args.fargs
+	local filter_fn = function(items) return items end
 
-		vim.cmd('windo set nornu nonu signcolumn=no')
-	else
-		vim.opt.laststatus = 2
-		vim.opt.cmdheight = 1
+	if #args ~= 0 then
+		local symbol = args[1]
 
-		vim.cmd('windo set rnu nu signcolumn=auto')
+		-- Make sure the given argument is a valid symbol
+		local found = false
+		for i = 1, #vim.lsp.protocol.SymbolKind do
+			if symbol == vim.lsp.protocol.SymbolKind[i] then
+				found = true
+			end
+		end
+
+		if not found then
+			vim.api.nvim_err_writeln("Argument must be one of: " ..
+				table.concat(vim.lsp.protocol.SymbolKind, ', '))
+		end
+
+		filter_fn = function(items)
+			local filtered_symbols = {}
+			for i = 1, #items do
+				if items[i].kind == symbol then
+					table.insert(filtered_symbols, items[i])
+				end
+			end
+			return filtered_symbols
+		end
 	end
 
-	require('ibl').update({ enabled = Minimal })
-end
+	vim.lsp.buf.document_symbol({
+		on_list = function(options)
+			vim.fn.setloclist(vim.fn.winnr(), filter_fn(options.items), 'r')
+			vim.api.nvim_command('lopen')
+			vim.api.nvim_command('lfirst')
+		end
 
-function Toggle_minimal_ui()
-	Set_minimal_ui(Minimal)
-	Minimal = not Minimal
+	})
 end
 
 local custom_commands = {
-	['Cfg'] = 'edit ~/.config/nvim/init.lua',
-	['Cmd'] = 'edit ~/.config/nvim/lua/custom_commands.lua',
-	['Plg'] = 'edit ~/.config/nvim/lua/plugins.lua',
-	['Lsp'] = 'edit ~/.config/nvim/lua/lsp_init.lua',
-	['Keys'] = 'edit ~/.config/nvim/lua/keymaps.lua',
-	['Packer'] = 'edit ~/.config/nvim/lua/packer_init.lua',
-	['NextError'] = 'lua vim.diagnostic.goto_next()',
-	['PrevError'] = 'lua vim.diagnostic.goto_prev()',
-	['Twin'] = 'lua Open_corresponding_file()',
-	['Src'] = 'lua Open_corresponding_source_file()',
-	['Hdr'] = 'lua Open_corresponding_header_file()',
-	['MinimalUI'] = 'lua Toggle_minimal_ui()',
-	['Fmt'] = 'lua vim.lsp.buf.format()'
+	{ cmd_name = 'Cfg',           cmd = 'edit ~/.configd/nvim/init.lua',               options = {} },
+	{ cmd_name = 'Cmd',           cmd = 'edit ~/.config/nvim/lua/custom_commands.lua', options = {} },
+	{ cmd_name = 'Plg',           cmd = 'edit ~/.config/nvim/lua/plugins.lua',         options = {} },
+	{ cmd_name = 'Lsp',           cmd = 'edit ~/.config/nvim/lua/lsp_init.lua',        options = {} },
+	{ cmd_name = 'Keys',          cmd = 'edit ~/.config/nvim/lua/keymaps.lua',         options = {} },
+	{ cmd_name = 'Packer',        cmd = 'edit ~/.config/nvim/lua/packer_init.lua',     options = {} },
+	{ cmd_name = 'NextError',     cmd = 'lua vim.diagnostic.goto_next()',              options = {} },
+	{ cmd_name = 'PrevError',     cmd = 'lua vim.diagnostic.goto_prev()',              options = {} },
+	{ cmd_name = 'FilterSymbols', cmd = Filter_symbols,                                options = { nargs = '?' } },
+	{ cmd_name = 'Fmt',           cmd = function() vim.lsp.buf.format() end,           options = {} },
 }
 
-for word, command in pairs(custom_commands) do
-	vim.api.nvim_create_user_command(word, command, {})
+for _, cc in ipairs(custom_commands) do
+	vim.api.nvim_create_user_command(cc.cmd_name, cc.cmd, cc.options)
 end

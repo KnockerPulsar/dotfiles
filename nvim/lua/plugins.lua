@@ -1,10 +1,11 @@
 require('packer_init')
-require('lsp_init')
 require('cmp_init')
 
-require('nvim_comment').setup()
 require('mason').setup()
 require("mason-lspconfig").setup()
+require('lsp_init')
+
+require('nvim_comment').setup()
 require('vgit').setup()
 
 require('leap').add_default_mappings()

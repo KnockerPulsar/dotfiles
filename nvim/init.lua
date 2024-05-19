@@ -10,6 +10,8 @@ vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
 vim.opt.splitright = true
 vim.opt.cursorline = true
 vim.opt.mouse = ""
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,localoptions,terminal"
 vim.o.undofile = true
