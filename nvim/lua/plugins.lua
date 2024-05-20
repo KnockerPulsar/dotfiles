@@ -27,7 +27,7 @@ require('telescope').setup{
 			width = 0.9,
 			height = 0.9
 		},
-		file_ignore_patterns = { '.git' }
+		file_ignore_patterns = { '.git', '.cache', "%.o", "%.mod", "%.ko", "%.symvers", "%.cmd" },
 	},
 	pickers = {
 		find_files  = { hidden = true, theme = 'ivy' },
