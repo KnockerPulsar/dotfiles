@@ -1,8 +1,3 @@
-tui enable
-set follow-fork-mode child
-set print pretty on
-
-
 # https://stackoverflow.com/a/42721326
 ## skip all STL source files
 define skipstl
@@ -31,4 +26,11 @@ end
 define hookpost-run
     skipstl
 end
+
+tui enable
+# set follow-fork-mode child
+set print pretty on
+set debuginfod enabled on
+set history save on
+set history expansion on
 ################################################################################

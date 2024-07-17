@@ -166,19 +166,15 @@ mode "resize" {
 bar {
         status_command i3blocks
         position bottom
-        mode hide
 
         colors {
-                separator #081419
+                separator #AAAAAA
                 background #111111
 
                 #                        #Border #Backg. #Text
                 focused_workspace        #fd06e3 #111111 #FFFFFF
                 inactive_workspace       #002b36 #586e75 #002b36
                 urgent_workspace         #d33682 #d33682 #fdf6e3
-
-                # Enable transparency for the separator? Not quite sure..
-                separator                $transparent
         }
 }
 
@@ -245,7 +241,7 @@ bindsym $mod+shift+semicolon exec --no-startup-id $config_repo/myrmidon/myrmidon
 #	       		        Tab border 	Tab bckg	Tab text	split indicator		Window border
 client.focused		      	#1c1c1c		#1c1c1c		#ffffff		#2e9ef4			#e3e3e3
 client.focused_inactive		#1c1c1c		#4c4c4c		#ffffff		#222244			#222222
-client.unfocused	      	#1c1c1c		#1c1c1c		#6c6cic		#222244			#222222
+client.unfocused	      	#1c1c1c		#1c1c1c		#6c6c6c		#222244			#222222
 
 
 # i3 Flags

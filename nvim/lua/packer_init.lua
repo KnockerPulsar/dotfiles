@@ -143,6 +143,10 @@ return packer.startup(function()
 	    config = function() require("nvim-autopairs").setup {} end 
 	}
 
+	use {
+		'ray-x/lsp_signature.nvim',
+	}
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end

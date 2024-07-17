@@ -119,10 +119,10 @@ fi
 
 # Custom stuff starts here
 ################################################################################
-alias ls=exa
+alias ls=eza
 
 export SCRIPT_DIR=/usr/share/i3blocks
-export GCM_CREDENTIAL_STORE=plaintext
+export GCM_CREDENTIAL_STORE=gpg
 
 . "$HOME/.cargo/env"
 
@@ -131,6 +131,10 @@ export PDSH_RCMD_TYPE=ssh
 export PATH=$PATH:/home/tarek/.local/bin
 export PATH=$PATH:/home/tarek/Downloads/renderdoc_1.27/bin/
 export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$HOME/software/flutter/bin/
+export EDITOR=nvim
+export GDBHISTFILE=$HOME/.gdb_history
+
 
 alias git-conflicts="git diff --name-only --diff-filter=U --relative"
 alias rm="trash-put"
@@ -162,5 +166,3 @@ xterm*|rxvt*|screen*)
     ;;
 esac
 
-# Interferes with splash's libportaudio!
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/tarek/matlab_r2023a/bin/glnxa64/

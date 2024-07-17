@@ -16,6 +16,8 @@ vim.opt.relativenumber = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,localoptions,terminal"
 vim.o.undofile = true
 
+vim.o.wildmode = "longest,list"
+
 vim.cmd [[
 		colorscheme gruber-darker
 		set termguicolors
@@ -23,15 +25,9 @@ vim.cmd [[
 ]]
 
 vim.cmd [[
-		autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
 		autocmd! BufNewFile,BufRead *.cl set filetype=opencl
 ]]
 
 require('custom_commands')
 require('keymaps')
 require('plugins')
-
-vim.cmd [[
-		autocmd! VimLeavePre lua if(Minimal) { Set_minimal_ui(false) }
-]]
-

@@ -170,6 +170,9 @@ local custom_keys = {
 	{ NV,  ']l',          ':lnext<CR>' },
 	{ NV,  '[l',          ':lprev<CR>' },
 
+	{ NV,  ']c',          ':cnext<CR>' },
+	{ NV,  '[c',          ':cprev<CR>' },
+
 	{ 'n', '<M-1>',       ':1tabnext<CR>' },
 	{ 'n', '<M-2>',       ':2tabnext<CR>' },
 	{ 'n', '<M-3>',       ':3tabnext<CR>' },

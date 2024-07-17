@@ -108,7 +108,7 @@ function Filter_symbols(_args)
 end
 
 local custom_commands = {
-	{ cmd_name = 'Cfg',           cmd = 'edit ~/.configd/nvim/init.lua',               options = {} },
+	{ cmd_name = 'Cfg',           cmd = 'edit ~/.config/nvim/init.lua',               options = {} },
 	{ cmd_name = 'Cmd',           cmd = 'edit ~/.config/nvim/lua/custom_commands.lua', options = {} },
 	{ cmd_name = 'Plg',           cmd = 'edit ~/.config/nvim/lua/plugins.lua',         options = {} },
 	{ cmd_name = 'Lsp',           cmd = 'edit ~/.config/nvim/lua/lsp_init.lua',        options = {} },

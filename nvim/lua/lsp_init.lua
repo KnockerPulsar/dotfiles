@@ -67,6 +67,18 @@ pylsp_config['settings'] = {
 				maxLineLength = 120
 			}
 		}
+	},
+}
+
+local luals_config = deepcopy(cmp_config)
+luals_config['settings'] = {
+	Lua = {
+		runtime = {
+			version = 'LuaJIT'
+		},
+		diagnostics = {
+			globals = {'vim'}
+		}
 	}
 }
 
@@ -74,7 +86,7 @@ local lsp_configs = {
 	['tsserver'] = cmp_config,
 	['clangd'] = cmp_config,
 	['jdtls'] = cmp_config,
-	['lua_ls'] = cmp_config,
+	['lua_ls'] = luals_config,
 	['bashls'] = cmp_config,
 	['rust_analyzer'] = cmp_config,
 	['cmake'] = cmp_config,
