@@ -107,6 +107,11 @@ function Filter_symbols(_args)
 	})
 end
 
+function Copy_current_file_path()
+  local filepath = vim.fn.expand('%')
+  vim.fn.setreg('+', filepath) -- write to clippoard
+end
+
 local custom_commands = {
 	{ cmd_name = 'Cfg',           cmd = 'edit ~/.config/nvim/init.lua',               options = {} },
 	{ cmd_name = 'Cmd',           cmd = 'edit ~/.config/nvim/lua/custom_commands.lua', options = {} },
@@ -118,6 +123,7 @@ local custom_commands = {
 	{ cmd_name = 'PrevError',     cmd = 'lua vim.diagnostic.goto_prev()',              options = {} },
 	{ cmd_name = 'FilterSymbols', cmd = Filter_symbols,                                options = { nargs = '?' } },
 	{ cmd_name = 'Fmt',           cmd = function() vim.lsp.buf.format() end,           options = {} },
+	{ cmd_name = 'CopyPath',      cmd = Copy_current_file_path,           	           options = {} },
 }
 
 for _, cc in ipairs(custom_commands) do

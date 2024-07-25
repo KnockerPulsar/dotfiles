@@ -11,8 +11,13 @@ require('vgit').setup()
 require('leap').add_default_mappings()
 
 require("which-key").setup({
-      window = { margin = { 1, 0, 0, 0.75 } },
-      layout = { height = { min = 4, max = 80 } },
+	preset = "helix"
+})
+
+require('which-key').add({
+  { " a", group = "Align" },
+  { " ac", desc = "To character" },
+  { " as", desc = "To string" },
 })
 
 require('command-completion').setup{
@@ -68,16 +73,6 @@ require('lualine').setup {
 		component_separators = { left = '|', right = '|' }
 	}
 }
-
-require('which-key').register({
-		a = {
-			name = "Align",
-			c = "To character",
-			s = "To string"
-		}
-	},
-	{ prefix = vim.g.mapleader }
-)
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)

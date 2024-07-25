@@ -100,7 +100,7 @@ local lsp_configs = {
 	['texlab'] = cmp_config
 }
 
-vim.lsp.set_log_level('info')
+vim.lsp.set_log_level('warn')
 
 for lsp_name, lsp_config in pairs(lsp_configs) do
 	lspconfig[lsp_name].setup(lsp_config)
