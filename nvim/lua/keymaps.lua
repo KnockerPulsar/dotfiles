@@ -180,7 +180,8 @@ local custom_keys = {
 
 	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=horizontal size=15]] end },
 
-	{ 'v', '==',          format_selection,                                                  { noremap = true, silent = true, expr = true } }
+	{ 'v', '==',          format_selection, { noremap = true, silent = true, expr = true } },
+	{ 'c', 'Bd',          'bp | bd #', { noremap = true, silent = true } }
 }
 
 if vim.g.neovide then
@@ -207,3 +208,4 @@ for _, ck in ipairs(custom_keys) do
 	local mode, key, result, options = ck[1], ck[2], ck[3], ck[4]
 	vim.keymap.set(mode, key, result, options or NS)
 end
+
