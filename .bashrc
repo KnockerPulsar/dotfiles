@@ -120,6 +120,8 @@ fi
 # Custom stuff starts here
 ################################################################################
 alias ls=eza
+alias git-conflicts="git diff --name-only --diff-filter=U --relative"
+alias rm="trash-put"
 
 export SCRIPT_DIR=/usr/share/i3blocks
 export GCM_CREDENTIAL_STORE=gpg
@@ -128,16 +130,17 @@ export GCM_CREDENTIAL_STORE=gpg
 
 export JAVA_HOME=$HOME/software/jdk-17.0.10
 export PDSH_RCMD_TYPE=ssh
+export EDITOR=nvim
+export GDBHISTFILE=$HOME/.gdb_history
+
 export PATH=$PATH:/home/tarek/.local/bin
 export PATH=$PATH:/home/tarek/Downloads/renderdoc_1.27/bin/
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/software/flutter/bin/
-export EDITOR=nvim
-export GDBHISTFILE=$HOME/.gdb_history
+export PATH=$PATH:$HOME/software/xkb-switch-1.8.5/build
+export PATH=$PATH:/usr/lib/ccache
 
-
-alias git-conflicts="git diff --name-only --diff-filter=U --relative"
-alias rm="trash-put"
+stty -ixon
 
 # https://faq.i3wm.org/question/2481/how-to-show-cli-application-name-in-window-title.1.html
 case "$TERM" in
@@ -165,4 +168,3 @@ xterm*|rxvt*|screen*)
 *)
     ;;
 esac
-

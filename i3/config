@@ -186,8 +186,8 @@ bindsym XF86AudioMute		exec --no-startup-id pactl set-sink-mute 0 toggle && pact
 bindsym XF86AudioLowerVolume    exec --no-startup-id pactl set-sink-volume 0 -5% && pactl set-sink-volume 1 -5%
 bindsym XF86AudioRaiseVolume    exec --no-startup-id pactl set-sink-volume 0 +5% && pactl set-sink-volume 1 +5%
 
-bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +2%
-bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q set 2%-
+bindsym XF86MonBrightnessUp     exec --no-startup-id brightnessctl -q set +5%
+bindsym XF86MonBrightnessDown	exec --no-startup-id brightnessctl -q set 5%-
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
@@ -226,7 +226,7 @@ bindsym Mod1+Tab focus mode_toggle
 
 # Setup language switching with left alt + left shift 
 # Start keymapper
-bindsym $mod+backslash exec --no-startup-id $config_repo/i3/setup_keyboard_language.sh
+bindsym $mod+backslash exec --no-startup-id $config_repo/scripts/setup_keyboard_language.sh
 
 # Cycle through wallpapers
 bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.png $wallpapers/*.jpg
@@ -259,8 +259,8 @@ default_floating_border none
 
 # Starting applications
 ################################################################################
-# Setup language/layout switching between en and ar
-exec --no-startup-id exec $config_repo/i3/setup_keyboard_language.sh
+# Setup language/layout switching
+exec --no-startup-id exec $config_repo/scripts/setup_keyboard_language.sh
 
 # Start copyq at startup
 exec --no-startup-id copyq
@@ -281,8 +281,9 @@ exec --no-startup-id picom
 # start rofication daemon
 exec --no-startup-id $config_repo/Rofication/rofication-daemon.py
 
+# Start timetrap in the scratch workspace
 for_window [class="timetrap"] move scratchpad
 exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash"
 
-# Disable capslock
-exec --no-startup-id setxkbmap -option caps:escape 
+# fcitx for japanese support
+exec --no-startup-id fcitx -d

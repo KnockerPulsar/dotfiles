@@ -30,7 +30,8 @@ end
 tui enable
 # set follow-fork-mode child
 set print pretty on
-set debuginfod enabled on
+set debuginfod enabled off
 set history save on
 set history expansion on
+skipstl
 ################################################################################

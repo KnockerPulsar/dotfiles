@@ -22,7 +22,7 @@ laptop_display_idx=$(find_substring_index "eDP" ${outputs[@]})
 external_display_idx=$(find_substring_index "HDMI" ${outputs[@]})
 
 if [[ $laptop_display_idx == -1 ]] || [[ $external_display_idx == -1 ]]; then 
-    echo "cannot find laptop display or external display\n"
+	logger -t $(basename $0) "cannot find laptop display or external display"
     exit -1
 fi
 

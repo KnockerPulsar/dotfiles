@@ -77,8 +77,7 @@ print "$short_text\n";
 if ($status eq 'Discharging') {
 
 	if ($percent < 20) {
-		# print "#FF0000\n";
-		print "#AAAAAA\n";
+		print "#FF0000\n";
 	} elsif ($percent < 40) {
 		print "#FFAE00\n";
 	} elsif ($percent < 60) {
@@ -87,10 +86,9 @@ if ($status eq 'Discharging') {
 		print "#A8FF00\n";
 	}
 
-	# Uncomment to bring back the pink background on very low battery percentages
-	# if ($percent < 5) {
-	# 	exit(33);
-	# }
+	if ($percent < 5) {
+		exit(33);
+	}
 }
 
 exit(0);

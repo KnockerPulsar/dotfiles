@@ -28,6 +28,9 @@ command=$HOME/dotfiles/i3blocks/i3blocklets/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+[timetrap-task]
+interval=5
+
 # i3 focused window split indicator
 [split-indicator]
 interval=1
@@ -104,10 +107,6 @@ color=#83e68b
 command=date '+%a %d-%m-%Y %H:%M:%S'
 interval=5
 
-[xkb_layout]
-label=Layout 
-interval=persistent
-
 # Seems to run the CPU a bit too hard?
 # [brightness]
 # interval=persist
@@ -115,6 +114,12 @@ interval=persistent
 [rofication]
 label=Notifications: 
 interval=5
+
+[xkb_layout]
+font=monospace
+font_weight=bold
+interval=persist
+markup=pango
 
 # Disk usage
 #

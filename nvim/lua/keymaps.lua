@@ -181,7 +181,6 @@ local custom_keys = {
 	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=horizontal size=15]] end },
 
 	{ 'v', '==',          format_selection, { noremap = true, silent = true, expr = true } },
-	{ 'c', 'Bd',          'bp | bd #', { noremap = true, silent = true } }
 }
 
 if vim.g.neovide then

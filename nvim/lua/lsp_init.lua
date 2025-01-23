@@ -83,21 +83,23 @@ luals_config['settings'] = {
 }
 
 local lsp_configs = {
-	['tsserver'] = cmp_config,
+	['ts_ls'] = cmp_config,
 	['clangd'] = cmp_config,
-	['jdtls'] = cmp_config,
+	-- ['jdtls'] = cmp_config,
 	['lua_ls'] = luals_config,
 	['bashls'] = cmp_config,
 	['rust_analyzer'] = cmp_config,
 	['cmake'] = cmp_config,
 	['html'] = cmp_config,
-	['intelephense'] = cmp_config,
+	-- ['intelephense'] = cmp_config,
 	['lemminx'] = cmp_config,
 	['pylsp'] = pylsp_config,
 	['marksman'] = cmp_config,
 	-- ['opencl_ls'] = cmp_config
 	['zls'] = cmp_config,
-	['texlab'] = cmp_config
+	['texlab'] = cmp_config,
+	['robotframework_ls'] = cmp_config,
+	['yamlls'] = cmp_config,
 }
 
 vim.lsp.set_log_level('warn')

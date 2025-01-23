@@ -6,7 +6,7 @@ require("mason-lspconfig").setup()
 require('lsp_init')
 
 require('nvim_comment').setup()
-require('vgit').setup()
+-- require('vgit').setup()
 
 require('leap').add_default_mappings()
 

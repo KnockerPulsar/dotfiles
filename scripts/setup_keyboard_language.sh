@@ -5,10 +5,10 @@ while read event
 do
         case $event in
         XIDeviceEnabled*XISlaveKeyboard*)
-                setxkbmap -model pc104 -layout us,ara -option "lv3:ralt_alt,grp:alt_shift_toggle"
+                setxkbmap -model pc104 -layout us,ara,jp -option "lv3:ralt_alt,grp:alt_shift_toggle"
 		setxkbmap -option caps:none
 		;;
         esac
 done &
 
-input-remapper-control --command autoload --preset K606-v2
+# input-remapper-control --command autoload --preset K606-v2

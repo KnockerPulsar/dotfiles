@@ -1,0 +1,11 @@
+[Unit]
+Description=Lid State Listener
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/tarek/dotfiles/scripts/monitor-laptop-lid.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -40,7 +40,7 @@ You can go through each config and change out the dependencies for your own prog
  * i3
    * Default i3 config
    * launching some applications on startup
-     * Calls [setup_keyboard_language.sh](i3/setup_keyboard_language.sh) to setup en/ar switching
+     * Calls [setup_keyboard_language.sh](i3/scripts/setup_keyboard_language.sh) to setup en/ar switching
      * Starts `copyq` 
      * Starts `gsd-xsettings` so that gnome things work properly
      * Starts `feh` to display a random wallpaper from `/usr/share/backgrounds` folder 

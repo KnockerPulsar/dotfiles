@@ -84,6 +84,7 @@ function Filter_symbols(_args)
 		if not found then
 			vim.api.nvim_err_writeln("Argument must be one of: " ..
 				table.concat(vim.lsp.protocol.SymbolKind, ', '))
+			return
 		end
 
 		filter_fn = function(items)
@@ -99,21 +100,27 @@ function Filter_symbols(_args)
 
 	vim.lsp.buf.document_symbol({
 		on_list = function(options)
-			vim.fn.setloclist(vim.fn.winnr(), filter_fn(options.items), 'r')
-			vim.api.nvim_command('lopen')
-			vim.api.nvim_command('lfirst')
+			local filtered_items = filter_fn(options.items)
+			vim.fn.setloclist(vim.fn.winnr(), filtered_items, 'r')
+			if #filtered_items > 0 then
+				vim.api.nvim_command('lopen')
+				vim.api.nvim_command('lfirst')
+			else
+				print("No results found")
+			end
 		end
-
 	})
 end
 
 function Copy_current_file_path()
-  local filepath = vim.fn.expand('%')
-  vim.fn.setreg('+', filepath) -- write to clippoard
+	local filepath = vim.fn.expand('%')
+	local line_number, _ = unpack(vim.api.nvim_win_get_cursor(0))
+	local full_path = filepath .. ":" .. line_number
+	vim.fn.setreg('+', full_path) -- write to clippoard
 end
 
 local custom_commands = {
-	{ cmd_name = 'Cfg',           cmd = 'edit ~/.config/nvim/init.lua',               options = {} },
+	{ cmd_name = 'Cfg',           cmd = 'edit ~/.config/nvim/init.lua',                options = {} },
 	{ cmd_name = 'Cmd',           cmd = 'edit ~/.config/nvim/lua/custom_commands.lua', options = {} },
 	{ cmd_name = 'Plg',           cmd = 'edit ~/.config/nvim/lua/plugins.lua',         options = {} },
 	{ cmd_name = 'Lsp',           cmd = 'edit ~/.config/nvim/lua/lsp_init.lua',        options = {} },
@@ -124,6 +131,7 @@ local custom_commands = {
 	{ cmd_name = 'FilterSymbols', cmd = Filter_symbols,                                options = { nargs = '?' } },
 	{ cmd_name = 'Fmt',           cmd = function() vim.lsp.buf.format() end,           options = {} },
 	{ cmd_name = 'CopyPath',      cmd = Copy_current_file_path,           	           options = {} },
+	-- { cmd_name = 'Bd',            cmd = 'bp|bd #', 				   	   options = {} }
 }
 
 for _, cc in ipairs(custom_commands) do

@@ -1,7 +1,15 @@
 [
 	{
 		"name": "Swap monitor workspaces",
-		"command": "$DOTFILES/swap_workspaces.sh"
+		"command": "$DOTFILES/scripts/swap_workspaces.sh"
 
+	},
+	{
+		"name": "Setup keyboard language switching",
+		"command": "$DOTFILES/scripts/setup_keyboard_language.sh"
+	},
+	{
+		"name": "Reload monitor config",
+		"command": "$DOTFILES/scripts/enable-external-monitor.sh"
 	}
 ]
