@@ -12,20 +12,23 @@ vim.opt.cursorline = true
 vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
-
+vim.wo.wrap = false
+vim.o.expandtab = true
+vim.o.completeopt = "noinsert,popup"
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,localoptions,terminal"
 vim.o.undofile = true
+vim.o.shiftwidth = 4
 
-vim.o.wildmode = "longest,list"
+-- vim.o.wildmode = "longest,list"
 
 vim.cmd [[
-		colorscheme gruber-darker
-		set termguicolors
-		set hidden
+        colorscheme tanwiri
+        set termguicolors
+        set hidden
 ]]
 
 vim.cmd [[
-		autocmd! BufNewFile,BufRead *.cl set filetype=opencl
+        autocmd! BufNewFile,BufRead *.cl set filetype=opencl
 ]]
 
 require('custom_commands')
