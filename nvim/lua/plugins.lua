@@ -43,15 +43,86 @@ require('ibl').setup {
     scope = { enabled = true, show_start = true }
 }
 
-require('lualine').setup {
-	options = {
-		section_separators = { left = '', right = '' },
-		component_separators = { left = '|', right = '|' }
-	}
-}
 
+local function tanwiri_lualine_setup()
+    local function get_hl(group, attr)
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        return hl[attr] and string.format("#%06x", hl[attr]) or "NONE"
     end
+
+    -- Generate a theme object based on your current colorscheme
+    local dynamic_tanwiri = {
+        normal   = {
+            -- Section A: Often the Mode (uses your TabLine selection style)
+            a = { fg = get_hl('TabLineSel', 'fg'), bg = get_hl('TabLineSel', 'bg'), gui = 'bold' },
+            -- Section B: Mid-left (uses your StatusLine colors)
+            b = { fg = get_hl('StatusLine', 'fg'), bg = get_hl('StatusLine', 'bg') },
+            -- Section C: The long middle bar (uses your TabLine background style)
+            c = { fg = get_hl('TabLine', 'fg'), bg = get_hl('TabLine', 'bg') },
+        },
+        insert   = { a = { fg = get_hl('TabLineSel', 'fg'), bg = get_hl('TabLineSel', 'bg'), gui = 'bold' } },
+        visual   = { a = { fg = get_hl('TabLineSel', 'fg'), bg = get_hl('TabLineSel', 'bg'), gui = 'bold' } },
+        replace  = { a = { fg = get_hl('TabLineSel', 'fg'), bg = get_hl('TabLineSel', 'bg'), gui = 'bold' } },
+        inactive = {
+            a = { fg = get_hl('StatusLineNC', 'fg'), bg = get_hl('StatusLineNC', 'bg') },
+            b = { fg = get_hl('StatusLineNC', 'fg'), bg = get_hl('StatusLineNC', 'bg') },
+            c = { fg = get_hl('StatusLineNC', 'fg'), bg = get_hl('StatusLineNC', 'bg') },
+        },
+    }
+
+    require('lualine').setup({
+        options = {
+            theme = dynamic_tanwiri,
+            globalstatus = true,
+            component_separators = '',
+            section_separators = '',
+        },
+        sections = {
+            lualine_a = { 'mode' },
+            lualine_b = {
+                'branch',
+                {
+                    'diff',
+                    colored = true,
+                    -- This is the key: Lualine will look for these groups in your .vim file
+                    diff_color = {
+                        added    = 'DiffAdd',
+                        modified = 'DiffChange',
+                        removed  = 'DiffDelete',
+                    },
+                }
+            },
+            lualine_c = { 'filename' },
+            lualine_x = { 'filetype' },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location' }
+        }
+    })
+end
+
+local function setup_lualine()
+    if vim.g.colors_name == "tanwiri" then
+        tanwiri_lualine_setup()
+    else
+        require('lualine').setup {
+            options = {
+                section_separators = { left = '', right = '' },
+                component_separators = { left = '|', right = '|' },
+                theme = 'auto'
+            }
+        }
+    end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function(_)
+        setup_lualine()
+    end,
 })
+
+setup_lualine()
+
+
 require('treesitter-context').setup {
 	enable = true,     -- Enable this plugin (Can be enabled/disabled later via commands)
 	multiwindow = true, -- Enable multiwindow support.
