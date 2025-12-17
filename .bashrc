@@ -139,32 +139,14 @@ export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/software/flutter/bin/
 export PATH=$PATH:$HOME/software/xkb-switch-1.8.5/build
 export PATH=$PATH:/usr/lib/ccache
+export PATH=$PATH:/home/tarek/.local/share/gem/ruby/3.3.0/bin
 
 stty -ixon
+. "$HOME/.cargo/env"
 
-# https://faq.i3wm.org/question/2481/how-to-show-cli-application-name-in-window-title.1.html
-case "$TERM" in
-xterm*|rxvt*|screen*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-    # Show the currently running command in the terminal title:
-    # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
-    show_command_in_title_bar()
-    {
-        case "$BASH_COMMAND" in
-            *\033]0*)
-                # The command is trying to set the title bar as well;
-                # this is most likely the execution of $PROMPT_COMMAND.
-                # In any case nested escapes confuse the terminal, so don't
-                # output them.
-                ;;
-            *)
-                echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} \$ ${BASH_COMMAND}\007"
-                ;;
-        esac
-    }
-    trap show_command_in_title_bar DEBUG
-    ;;
-*)
-    ;;
-esac
+# ZVM
+export ZVM_INSTALL="$HOME/.zvm/self"
+export PATH="$PATH:$HOME/.zvm/bin"
+export PATH="$PATH:$ZVM_INSTALL/"
