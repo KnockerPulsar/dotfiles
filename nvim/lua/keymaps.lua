@@ -40,19 +40,9 @@ local custom_keys = {
 		'<C-\\><C-n>'
 	},
 	{
-		'n',
-		'<M-d><M-d>',
-		'"_dd'
-	},
-	{
 		NV,
 		'<M-d>',
 		'"_d'
-	},
-	{
-		'n',
-		'<M-c><M-c>',
-		'V"_c'
 	},
 	{
 		NV,
@@ -61,59 +51,19 @@ local custom_keys = {
 	},
 	{
 		'n',
-		'gd',
-		':lua vim.lsp.buf.definition()<CR>'
-	},
-	{
-		'n',
-		'gD',
-		':lua vim.lsp.buf.declaration()<CR>'
-	},
-	{
-		'n',
-		'gi',
-		':lua vim.lsp.buf.implementation()<CR>'
-	},
-	{
-		'n',
-		'gw',
-		':lua vim.lsp.buf.document_symbol()<CR>'
-	},
-	{
-		'n',
-		'gW',
-		':lua vim.lsp.buf.workspace_symbol()<CR>'
-	},
-	{
-		'n',
-		'gr',
-		':lua vim.lsp.buf.references()<CR>'
-	},
-	{
-		'n',
-		'gt',
-		':lua vim.lsp.buf.type_definition()<CR>'
-	},
-	{
-		NV,
-		'K',
-		':lua vim.lsp.buf.hover()<CR>'
-	},
-	{
-		'n',
-		'<C-k>',
-		':lua vim.lsp.buf.signature_help()<CR>'
-	},
-	{
-		'n',
 		'<leader>f',
-		':lua require"telescope.builtin".find_files()<CR>'
+                function() require('telescope.builtin').find_files() end
 	},
 	{
 		'n',
 		'<leader>b',
-		':lua require"telescope.builtin".buffers()<CR>'
-	},
+                function()
+                        require("telescope.builtin").buffers({
+                                show_all_buffers = true,
+                                ignore_current_buffer = true,
+                        })
+                end
+        },
 	{
 		'n',
 		'<leader>rg',
@@ -124,21 +74,11 @@ local custom_keys = {
 		'<leader>gw',
 		':lua require"telescope.builtin".grep_string()<CR>'
 	},
-	{
-		'n',
-		'<leader><tab>',
-		':lua require"telescope-tabs".list_tabs()<CR>'
-	},
-	{
-		NV,
-		',',
-		':lua vim.lsp.buf.code_action()<CR>'
-	},
-	{
-		'n',
-		'<leader>rn',
-		':lua vim.lsp.buf.rename()<CR>'
-	},
+	-- {
+	-- 	'n',
+	-- 	'<leader><tab>',
+	-- 	':lua require"telescope-tabs".list_tabs()<CR>'
+	-- },
 	{
 		'x',
 		'<leader>ac',
@@ -164,47 +104,37 @@ local custom_keys = {
 	{ NVT, '<C-j>',       '5<C-w>+' },
 	{ NVT, '<C-k>',       '5<C-w>-' },
 
-	{ NV,  ']d',          ':NextError<CR>' },
-	{ NV,  '[d',          ':PrevError<CR>' },
-
-	{ NV,  ']l',          ':lnext<CR>' },
-	{ NV,  '[l',          ':lprev<CR>' },
-
-	{ NV,  ']c',          ':cnext<CR>' },
-	{ NV,  '[c',          ':cprev<CR>' },
-
-	{ 'n', '<M-1>',       ':1tabnext<CR>' },
-	{ 'n', '<M-2>',       ':2tabnext<CR>' },
-	{ 'n', '<M-3>',       ':3tabnext<CR>' },
-	{ 'n', '<M-4>',       ':4tabnext<CR>' },
+	{ 'n', '<leader>t1',       ':1tabnext<CR>' },
+	{ 'n', '<leader>t2',       ':2tabnext<CR>' },
+	{ 'n', '<leader>t3',       ':3tabnext<CR>' },
 
 	{ 'n', '<backspace>', function() vim.cmd [[ToggleTerm direction=horizontal size=15]] end },
 
 	{ 'v', '==',          format_selection, { noremap = true, silent = true, expr = true } },
+
+        {
+                'n',
+                'gd',
+                function() vim.lsp.buf.definition() end
+        },
+        {
+                'n',
+                'gD',
+                function() vim.lsp.buf.declaration() end
+        },
+        {
+                'n',
+                '<leader>se',
+                function() vim.diagnostic.open_float() end
+        },
+        {
+                'i',
+                '<C-space>',
+                function() vim.lsp.completion.get() end
+        }
 }
-
-if vim.g.neovide then
-	table.insert(
-		custom_keys, { NVT, '<C-=>', function()
-			vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
-		end
-		}
-	)
-
-
-	table.insert(
-		custom_keys, { NVT, '<C-->',
-			function()
-				if vim.g.neovide_scale_factor > 0.5 then
-					vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
-				end
-			end
-		}
-	)
-end
 
 for _, ck in ipairs(custom_keys) do
 	local mode, key, result, options = ck[1], ck[2], ck[3], ck[4]
 	vim.keymap.set(mode, key, result, options or NS)
 end
-
