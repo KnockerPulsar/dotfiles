@@ -1,7 +1,4 @@
 local vim = vim
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -31,7 +28,6 @@ local packer_stuff = {
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
 
-	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 	'nvim-lua/telescope.nvim',
 	'hrsh7th/cmp-nvim-lsp',
@@ -44,26 +40,14 @@ local packer_stuff = {
 	"folke/which-key.nvim",
 	"lukas-reineke/indent-blankline.nvim",
 	"terrortylor/nvim-comment",
-	-- 'mfussenegger/nvim-dap',
-	'smolck/command-completion.nvim',
 
-	-- "EdenEast/nightfox.nvim",
-	-- 'Shatur/neovim-ayu',
-	-- 'navarasu/onedark.nvim',
-	-- 'RRethy/nvim-base16',
-	-- 'tjdevries/colorbuddy.nvim',
-	-- 'bkegley/gloombuddy',
-	-- { "bluz71/vim-moonfly-colors", as = "moonfly" },
 	"blazkowolf/gruber-darker.nvim",
 
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	{ 'nvim-treesitter/nvim-treesitter-context' },
 	{ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } },
-	-- { 'tanvirtin/vgit.nvim', requires = { 'nvim-lua/plenary.nvim' } },
 
-	'Vonr/align.nvim',
 	'tpope/vim-fugitive',
-	'ggandor/leap.nvim',
 	'sbdchd/neoformat',
 }
 
@@ -138,14 +122,47 @@ return packer.startup(function()
 		end
 	}
 
-	use { 
-	    "windwp/nvim-autopairs", 
-	    config = function() require("nvim-autopairs").setup {} end 
+	use {
+		"windwp/nvim-autopairs",
+		config = function()
+			-- https://github.com/mrjones2014/dotfiles/blob/master/nvim/lua/my/configure/autopairs.lua
+			local Rule = require('nvim-autopairs.rule')
+			local npairs = require('nvim-autopairs')
+			local cond = require('nvim-autopairs.conds')
+			npairs.setup({})
+			-- <> pair for generics and stuff,
+			-- complete <> if the preceding text is alphanumeric or :: for Rust
+			npairs.add_rule(Rule('<', '>', {
+				-- *exclude* these filetypes so that nvim-ts-autotag works instead
+				'-html',
+				'-javascriptreact',
+				'-typescriptreact',
+			}):with_pair(cond.before_regex('%a+:?:?$', 3)):with_move(function(opts)
+				return opts.char == '>'
+			end))
+		end
 	}
 
-	use {
-		'ray-x/lsp_signature.nvim',
-	}
+        use {
+                "ThePrimeagen/refactoring.nvim",
+                requires = {
+                        { "nvim-lua/plenary.nvim" },
+                        { "nvim-treesitter/nvim-treesitter" }
+                },
+                config = function()
+                        require('refactoring').setup()
+                end
+        }
+
+        use "github/copilot.vim"
+
+        use {
+                "CopilotC-Nvim/CopilotChat.nvim",
+                requires = {
+                        { "nvim-lua/plenary.nvim" },
+
+                }
+        }
 
 	if packer_bootstrap then
 		require('packer').sync()
