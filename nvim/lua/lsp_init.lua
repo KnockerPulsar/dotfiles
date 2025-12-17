@@ -1,37 +1,3 @@
-local lspconfig = require 'lspconfig'
-
-local function dump(o)
-	if type(o) == 'table' then
-		local s = '{ '
-		for k, v in pairs(o) do
-			if type(k) ~= 'number' then k = '"' .. k .. '"' end
-			s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
-		end
-		return s .. '} '
-	else
-		return tostring(o)
-	end
-end
-
-local function custom_on_attach(client)
-	-- print('Attaching to ' .. client.name)
-
-	vim.api.nvim_create_autocmd("CursorHold", {
-		buffer = bufnr,
-		callback = function()
-			local opts = {
-				focusable = false,
-				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-				border = 'rounded',
-				source = 'always',
-				prefix = ' ',
-				scope = 'cursor',
-			}
-			vim.diagnostic.open_float(nil, opts)
-		end
-	})
-end
-
 -- http://lua-users.org/wiki/CopyTable
 local function deepcopy(orig, copies)
 	copies = copies or {}
@@ -54,9 +20,7 @@ local function deepcopy(orig, copies)
 	return copy
 end
 
-local cmp_config = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-cmp_config.on_attach = custom_on_attach
-
+local cmp_config = require('cmp_nvim_lsp').default_capabilities()
 
 local pylsp_config = deepcopy(cmp_config)
 pylsp_config['settings'] = {
@@ -82,20 +46,28 @@ luals_config['settings'] = {
 	}
 }
 
+local clangd_config = {
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--clang-tidy",
+		"--function-arg-placeholders",
+		"--completion-style=detailed",
+		"--header-insertion=never"
+	},
+}
+
 local lsp_configs = {
 	['ts_ls'] = cmp_config,
-	['clangd'] = cmp_config,
-	-- ['jdtls'] = cmp_config,
+	['clangd'] = clangd_config,
 	['lua_ls'] = luals_config,
 	['bashls'] = cmp_config,
 	['rust_analyzer'] = cmp_config,
 	['cmake'] = cmp_config,
 	['html'] = cmp_config,
-	-- ['intelephense'] = cmp_config,
 	['lemminx'] = cmp_config,
 	['pylsp'] = pylsp_config,
 	['marksman'] = cmp_config,
-	-- ['opencl_ls'] = cmp_config
 	['zls'] = cmp_config,
 	['texlab'] = cmp_config,
 	['robotframework_ls'] = cmp_config,
@@ -105,5 +77,20 @@ local lsp_configs = {
 vim.lsp.set_log_level('warn')
 
 for lsp_name, lsp_config in pairs(lsp_configs) do
-	lspconfig[lsp_name].setup(lsp_config)
+        vim.lsp.config(lsp_name, lsp_config)
 end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
+
+            -- Disable LSP syntax highlight
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+    end
+})
+
+vim.diagnostic.config({virtual_lines = true})
