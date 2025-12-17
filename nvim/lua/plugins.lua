@@ -30,17 +30,6 @@ require('telescope').setup{
 	}
 }
 
-require('snippy').setup{
-	mappings = {
-		is = {
-			['<Tab>'] = 'expand_or_advance',
-		},
-		nx = {
-			['<leader>x'] = 'cut_text',
-		},
-	},
-}
-
 require('nvim-treesitter.configs').setup{
     ensure_installed = { "c", "cpp", "lua", "rust", "python", "java", "javascript", "bash", "php", "typescript" },
     highlight = { enabled = true },
