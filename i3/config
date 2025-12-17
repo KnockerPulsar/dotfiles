@@ -36,16 +36,19 @@ set $mod Mod4
 set $wallpapers ~/tsutomu-nihei-wallpapers
 set $config_repo /home/tarek/dotfiles
 
+set $resize_val_slow    1
 set $resize_val         10
 set $resize_val_fast    40
 set $move_val           20
+
+set $terminal ghostty
 
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $terminal
 
 # Open roficiation gui
 bindsym $mod+n exec $config_repo/Rofication/rofication-gui.py
@@ -156,6 +159,18 @@ mode "resize" {
         bindsym Shift+Up          resize shrink height $resize_val_fast px or $resize_val_fast ppt
         bindsym Shift+Right       resize grow width $resize_val_fast px or $resize_val_fast ppt
 
+        # Slower versions of the above binds
+        bindsym Mod1+$left       resize shrink width $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+$down       resize grow height $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+$up         resize shrink height $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+$right      resize grow width $resize_val_slow px or $resize_val_slow ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Mod1+Left        resize shrink width $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+Down        resize grow height $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+Up          resize shrink height $resize_val_slow px or $resize_val_slow ppt
+        bindsym Mod1+Right       resize grow width $resize_val_slow px or $resize_val_slow ppt
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -165,7 +180,7 @@ mode "resize" {
 # finds out, if available)
 bar {
         status_command i3blocks
-        position bottom
+        position top
 
         colors {
                 separator #AAAAAA
@@ -194,7 +209,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Launch chrome on super+shift+enter
-bindsym $mod+Shift+Return 	exec --no-startup-id google-chrome
+bindsym $mod+Shift+Return 	exec --no-startup-id ~/software/firefox/firefox
 
 bindsym $mod+e 			exec --no-startup-id nautilus
 bindsym Print 			exec --no-startup-id flameshot gui
@@ -233,6 +248,9 @@ bindsym $mod+b exec --no-startup-id exec feh --bg-max --randomize $wallpapers/*.
 
 bindsym $mod+shift+semicolon exec --no-startup-id $config_repo/myrmidon/myrmidon.sh
 
+bindsym $mod+ctrl+d exec $config_repo/scripts/docked.sh
+bindsym $mod+ctrl+u exec $config_repo/scripts/undocked.sh
+
 # Colors
 ################################################################################
 
@@ -259,9 +277,6 @@ default_floating_border none
 
 # Starting applications
 ################################################################################
-# Setup language/layout switching
-exec --no-startup-id exec $config_repo/scripts/setup_keyboard_language.sh
-
 # Start copyq at startup
 exec --no-startup-id copyq
 
@@ -283,9 +298,14 @@ exec --no-startup-id $config_repo/Rofication/rofication-daemon.py
 
 # Start timetrap in the scratch workspace
 for_window [class="timetrap"] move scratchpad
-exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash"
+exec --no-startup-id $terminal --class=timetrap -- bash -c "t display; bash"
 
 # fcitx for japanese support
-exec --no-startup-id fcitx -d
+exec --no-startup-id fcitx5 -d
+
 exec --no-startup-id $config_repo/scripts/enable-external-monitor.sh
 
+# Remap caps to escape
+# TODO: Should this be moved to its own script? In fact, should all keyboard
+# related set up be moved to its own script?
+exec --no-startup-od setxkbmap -option caps:escape 
