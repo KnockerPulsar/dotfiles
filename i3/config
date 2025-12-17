@@ -287,3 +287,5 @@ exec --no-startup-id gnome-terminal --class=timetrap -- bash -c "t display; bash
 
 # fcitx for japanese support
 exec --no-startup-id fcitx -d
+exec --no-startup-id $config_repo/scripts/enable-external-monitor.sh
+

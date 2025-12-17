@@ -29,5 +29,8 @@ fi
 laptop_display=${outputs[$laptop_display_idx]}
 external_display=${outputs[$external_display_idx]}
 
-xrandr --output $external_display --mode 1920x1080 --rate 165 --rotate normal --right-of $laptop_display
+xrandr --output $external_display --mode 1920x1080 --rate 165 --rotate normal --above $laptop_display
+# Work around dead zone at the bottom of the monitor
+xrandr --setmonitor foo 1920/530x1057/300+0+0 $external_display
+
 exit 0

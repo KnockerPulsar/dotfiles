@@ -30,7 +30,6 @@ fi
 . "$HOME/.cargo/env"
 
 export DOTFILES="/home/tarek/dotfiles"
-bash "$DOTFILES/enable-external-monitor.sh"
 
 # ZVM
 export ZVM_INSTALL="$HOME/.zvm/self"
