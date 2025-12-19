@@ -1,5 +1,4 @@
 require('packer_init')
-require('cmp_init')
 
 require('mason').setup()
 require("mason-lspconfig").setup()
