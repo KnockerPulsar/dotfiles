@@ -123,13 +123,13 @@ local custom_keys = {
                 function() vim.lsp.buf.declaration() end
         },
         {
-                'n',
-                '<leader>se',
-                function() vim.diagnostic.open_float() end
+                'i',
+                '<C-space>',
+                function() vim.lsp.completion.get() end
         },
         {
                 'i',
-                '<C-space>',
+                '<C-n>',
                 function() vim.lsp.completion.get() end
         }
 }
