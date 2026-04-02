@@ -161,7 +161,12 @@ return packer.startup(function()
                 requires = {
                         { "nvim-lua/plenary.nvim" },
 
-                }
+                },
+                config = function()
+			require("CopilotChat").setup {
+				model = "claude-sonnet-4.6"
+			}
+		end
         }
 
 	if packer_bootstrap then

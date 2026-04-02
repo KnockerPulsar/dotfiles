@@ -119,6 +119,19 @@ vim.api.nvim_create_autocmd('FileType', {
     desc = 'Quickfix tweaks',
 })
 
+local function format(args)
+    local range = nil
+    if args.count ~= -1 then
+        local start_pos = vim.api.nvim_buf_get_mark(0, '<')
+        local end_pos = vim.api.nvim_buf_get_mark(0, '>')
+        range = {
+            ['start'] = { start_pos[1], start_pos[2] },
+            ['end'] = { end_pos[1], end_pos[2] },
+        }
+    end
+    vim.lsp.buf.format({ range = range, async = true })
+end
+
 local custom_commands = {
 	{ cmd_name = 'Cfg',           cmd = 'edit ~/.config/nvim/init.lua',                options = {} },
 	{ cmd_name = 'Cmd',           cmd = 'edit ~/.config/nvim/lua/custom_commands.lua', options = {} },
@@ -127,7 +140,7 @@ local custom_commands = {
 	{ cmd_name = 'Keys',          cmd = 'edit ~/.config/nvim/lua/keymaps.lua',         options = {} },
 	{ cmd_name = 'Packer',        cmd = 'edit ~/.config/nvim/lua/packer_init.lua',     options = {} },
 	{ cmd_name = 'FilterSymbols', cmd = Filter_symbols,                                options = { nargs = '?' } },
-	{ cmd_name = 'Fmt',           cmd = function() vim.lsp.buf.format() end,           options = {} },
+	{ cmd_name = 'Fmt',           cmd = format,                                        options = { range = true } },
 	{ cmd_name = 'CopyPath',      cmd = Copy_current_file_path,           	           options = {} },
 }
 

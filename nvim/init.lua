@@ -22,7 +22,7 @@ vim.o.shiftwidth = 4
 -- vim.o.wildmode = "longest,list"
 
 vim.cmd [[
-        colorscheme tanwiri
+        colorscheme gruber-darker
         set termguicolors
         set hidden
 ]]
